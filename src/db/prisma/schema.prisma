@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+generator client {
+  provider = "prisma-client-js"
+}
+
+//url(from prisma accelerate console) and directUrl(to your postgres db) both have to be specified when using prisma accelerate. If not using accelerate, only url has to be provided and it has to be the direct url to your postgres db.
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL") //this has to be in an env file in the same directory as the schema for the schema to pick it up.
+  directUrl = env("DIRECT_DATABASE_URL") //---||---
+}
+
+model Product {
+  id                 Int      @id
+  imageLink          String
+  name               String
+  description        String
+  specifications     String[]
+  ratings            Float
+  quantity_available Int
+  theme              Theme
+  purchasedBy        User[]
+}
+
+enum Theme {
+  Galactic_Urbanite
+  Quantum_Realm
+  Human_Future
+  Featured
+  Highlights
+}
+
+model User {
+  id              String             @id
+  avatar          String?
+  username        String             @unique
+  hashed_password String             @default("") //default is an empty string because providers like google do not automatically supply a password to be put in the db. But we do need this field for usrnm/pswrd login.
+  email           String?            @unique
+  cart            Int[]
+  wishList        Int[]
+  purchasedItems  Product[]
+  sessions        UserSession[]
+  OAuthAccount    UserOAuthAccount[]
+}
+
+model UserSession {
+  id        String   @id
+  userId    String //this field has to be named userId, look at the comment below for explanation
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) //this has to be named `u`ser if it is to refernece `U`ser. If it were to reference `U`serAuth, it would have to be named `u`serAuth. Says the lucia docs, they also say it comes from prisma and they aren't gonna fix it bcoz they didn't do it. I personally don't see any problem.
+}
+
+model UserOAuthAccount {
+  providerId     String
+  providerUserId Float  @unique
+  user           User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id        String
+
+  @@id([providerId, providerUserId])
+}
