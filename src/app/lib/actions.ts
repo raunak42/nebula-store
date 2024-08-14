@@ -1,5 +1,5 @@
 "use server"
-import { lucia } from "@/auth";
+import { lucia, validateRequest } from "@/auth";
 import { prisma } from "./prisma";
 import { products } from "./products";
 import { pixelAvatars } from "./randomAvatars";
@@ -111,3 +111,27 @@ export const startSession = async (userId: string) => {
     cookies().set("auth_session", sessionCookie.value, sessionCookie.attributes);
     return redirect("/home");
 }
+
+export const logout = async ():Promise<ActionResult> => {
+    const { session } = await validateRequest();
+    if (!session) {
+        return {
+            error: "Unauthorized",
+        };
+    }
+
+    await lucia.invalidateSession(session.id);
+
+    const sessionCookie = lucia.createBlankSessionCookie();
+    cookies().set(
+        sessionCookie.name,
+        sessionCookie.value,
+        sessionCookie.attributes
+    );
+
+    return redirect("/");
+}
+
+interface ActionResult {
+    error: string | null;
+  }
