@@ -1,6 +1,6 @@
 import axios from "axios";
-import { BASE_URL } from "./lib/constants";
-import { ApiDataAttributes, PrismaProductOutput } from "./lib/types";
+import { BASE_URL } from "./utils/constants";
+import { ApiDataAttributes, PrismaProductOutput } from "./utils/types";
 
 export default async function Home() {
   const res = await axios.get(`${BASE_URL}/api/getAllProducts`);

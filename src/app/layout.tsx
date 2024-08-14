@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
-import { ReactQueryWrapper } from "./Providers/ReactQueryWrapper";
+import { ReactQueryWrapper } from "./providers/ReactQueryWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 const montserrat = Montserrat({ subsets: ["latin"] });
