@@ -14,8 +14,9 @@ datasource db {
 }
 
 model Product {
-  id                 Int      @id
+  id                 Int      @id 
   imageLink          String
+  price              Float    @default(0)
   name               String
   description        String
   specifications     String[]
@@ -36,7 +37,7 @@ enum Theme {
 model User {
   id              String         @id
   avatar          String?
-  username        String?        
+  username        String?
   hashed_password String         @default("") //default is an empty string because providers like google do not automatically supply a password to be put in the db. But we do need this field for usrnm/pswrd login.
   email           String         @unique
   cart            Int[]
