@@ -1,11 +1,48 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  futureClickedState,
+  galacticClickedState,
+  moreClickedState,
+  quantumClickedState,
+  showNotificationState,
+} from "@/store";
+import { Session, User } from "lucia";
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  session: Session | null;
+  user: User | null;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ session, user }) => {
   const [shrink, setShrink] = useState<boolean>(false);
 
+  const [quantumCLicked, setQuantumClicked] =
+    useRecoilState(quantumClickedState);
+  const [futureClicked, setFutureClicked] = useRecoilState(futureClickedState);
+  const [galacticClicked, setGalacticClicked] =
+    useRecoilState(galacticClickedState);
+  const [moreClicked, setMoreClicked] = useRecoilState(moreClickedState);
+
+  const setShowNotification = useSetRecoilState(showNotificationState);
+
+  const router = useRouter();
+  const currentLocation = usePathname();
+  const homeLocation = "/";
+
   const onScroll = () => {
+    const restoreClickedState = () => {
+      setQuantumClicked(false);
+      setFutureClicked(false);
+      setGalacticClicked(false);
+      setMoreClicked(false);
+    };
+
+    restoreClickedState();
+
     const currentYPosition = window.scrollY;
     if (currentYPosition > 0) {
       setShrink(true);
@@ -17,7 +54,7 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
-  }, []);
+  });
 
   return (
     <div
@@ -44,10 +81,12 @@ export const Navbar: React.FC = () => {
             </button>
             <button
               onClick={() => {
-                const futureElement = document.getElementById("quantum");
-                futureElement?.scrollIntoView({
-                  behavior: "smooth",
-                });
+                if (currentLocation !== homeLocation) {
+                  localStorage.setItem("scroll-to", "quantum");
+                  window.location.assign(homeLocation); //router.push() will take you to the cached version of the page whereas, w.l.a() will take you to the page and re-render it, we want it to re-render for everything to run smoothly.
+                } else {
+                  setQuantumClicked(true);
+                }
               }}
               className=" hover:underline cursor-pointer"
             >
@@ -55,10 +94,12 @@ export const Navbar: React.FC = () => {
             </button>
             <button
               onClick={() => {
-                const futureElement = document.getElementById("future");
-                futureElement?.scrollIntoView({
-                  behavior: "smooth",
-                });
+                if (currentLocation !== homeLocation) {
+                  localStorage.setItem("scroll-to", "future");
+                  window.location.assign(homeLocation); //router.push() will take you to the cached version of the page whereas, w.l.a() will take you to the page and re-render it, we want it to re-render for everything to run smoothly.
+                } else {
+                  setFutureClicked(true);
+                }
               }}
               className=" hover:underline cursor-pointer"
             >
@@ -66,10 +107,12 @@ export const Navbar: React.FC = () => {
             </button>
             <button
               onClick={() => {
-                const futureElement = document.getElementById("galactic");
-                futureElement?.scrollIntoView({
-                  behavior: "smooth",
-                });
+                if (currentLocation !== homeLocation) {
+                  localStorage.setItem("scroll-to", "galactic");
+                  window.location.assign(homeLocation); //router.push() will take you to the cached version of the page whereas, w.l.a() will take you to the page and re-render it, we want it to re-render for everything to run smoothly.
+                } else {
+                  setGalacticClicked(true);
+                }
               }}
               className=" hover:underline cursor-pointer"
             >
@@ -77,10 +120,12 @@ export const Navbar: React.FC = () => {
             </button>
             <button
               onClick={() => {
-                const futureElement = document.getElementById("more");
-                futureElement?.scrollIntoView({
-                  behavior: "smooth",
-                });
+                if (currentLocation !== homeLocation) {
+                  localStorage.setItem("scroll-to", "more");
+                  window.location.assign(homeLocation); //router.push() will take you to the cached version of the page whereas, w.l.a() will take you to the page and re-render it, we want it to re-render for everything to run smoothly.
+                } else {
+                  setMoreClicked(true);
+                }
               }}
               className=" hover:underline cursor-pointer"
             >
@@ -88,7 +133,16 @@ export const Navbar: React.FC = () => {
             </button>
           </div>
         </div>
-        <div className="w-[20%] flex items-center justify-center">
+        <button
+          onClick={() => {
+            if (currentLocation !== homeLocation) {
+              router.push(homeLocation);
+            } else {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+          className="w-fit flex items-center justify-center"
+        >
           <Image
             className="transition-all duration-300"
             alt="img"
@@ -96,19 +150,23 @@ export const Navbar: React.FC = () => {
             height={shrink ? 50 : 60}
             src={"/brandmark-black.svg"}
           />
-        </div>
+        </button>
         <div className="w-[40%] flex items-center justify-center gap-[24px]">
-          <button className=" w-[10%] flex items-center justify-center">
-            {" "}
-            <Image alt="img" width={32} height={32} src={"/user.svg"} />
-          </button>
-          <button className=" w-[10%] flex items-center justify-center">
-            {" "}
+          <button
+            onClick={() => {
+              if (!session) {
+                setShowNotification(true);
+              }
+            }}
+            className=" w-[10%] flex items-center justify-center"
+          >
             <Image alt="img" width={30} height={30} src={"/cart.svg"} />
           </button>
-          <button className=" w-[10%] flex items-center justify-center">
-            {" "}
-            <Image alt="img" width={34} height={34} src={"/heart.svg"} />
+          <button
+            onClick={() => setShowNotification(true)}
+            className=" w-[10%] flex items-center justify-center"
+          >
+            <Image alt="img" width={32} height={32} src={"/user.svg"} />
           </button>
         </div>
       </div>
