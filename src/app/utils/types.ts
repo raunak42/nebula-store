@@ -4,4 +4,5 @@ export type PrismaProductOutput = Partial<Prisma.ProductGetPayload<{ select: {};
 
 export interface ApiDataAttributes {
     products?: PrismaProductOutput[]
+    product?: PrismaProductOutput
 }
