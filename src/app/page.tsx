@@ -9,8 +9,11 @@ import { Highlights } from "./components/Highlights/HIghlights";
 import { Banner } from "./components/Banner/Banner";
 
 export default async function Home() {
-  const res = await axios.get(`${BASE_URL}/api/getAllProducts`);
-  const data: ApiDataAttributes = res.data;
+  const res = await fetch(`${BASE_URL}/api/getAllProducts`,{
+    method:"GET",
+    cache:"no-store"
+  });
+  const data: ApiDataAttributes = await res.json();
   const products = data.products!;
 
   const quantumCollection = products.filter(
@@ -36,7 +39,7 @@ export default async function Home() {
   }
 
   return (
-    <div className={`w-full flex flex-col gap-[80px]`}>
+    <div className={`w-full flex flex-col gap-[80px] mt-[76px]`}>
       <Banner/>
       <Quantum items={quantumCollection} />
       <Future items={futureCollection} />
