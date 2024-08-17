@@ -3,6 +3,7 @@ import { PrismaProductOutput } from "@/app/utils/types";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { TextAnimator } from "@/app/animators/TextAnimator/TextAnimator";
+import Link from "next/link";
 
 interface FeatProps {
   item: PrismaProductOutput;
@@ -10,7 +11,13 @@ interface FeatProps {
 
 export const FeaturedProduct: React.FC<FeatProps> = ({ item }) => {
   return (
-    <div className="flex flex-row items-start justify-center gap-[120px] w-full">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ amount: 0.1 }}
+      className="flex flex-row items-start justify-center gap-[120px] w-full"
+    >
       <motion.div
         initial={{ opacity: 0, x: -400 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -47,10 +54,13 @@ export const FeaturedProduct: React.FC<FeatProps> = ({ item }) => {
             );
           })}
         </ul>
-        <button className=" w-[60%] mt-[64px] bg-black text-lg text-white p-[12px] rounded-lg">
+        <Link
+          href={`/product/${item.id}`}
+          className=" w-[60%] mt-[64px] bg-black text-lg text-white p-[12px] rounded-lg flex items-center justify-center"
+        >
           Explore product
-        </button>
+        </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
