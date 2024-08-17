@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "next dev --port 3000 --hostname 0.0.0.0",
+    "build": " cd ./src/db && npx prisma generate --no-engine && cd - && next build",
+    "start": "next start --port 3000 --hostname 0.0.0.0",
     "lint": "next lint"
   },
   "dependencies": {
@@ -20,9 +20,11 @@
     "framer-motion": "^11.3.28",
     "lucia": "^3.2.0",
     "next": "14.2.5",
+    "nextjs-toploader": "^1.6.12",
     "prisma": "^5.18.0",
     "react": "^18",
     "react-dom": "^18",
+    "recoil": "^0.7.7",
     "sharp": "^0.33.4",
     "zod": "^3.23.8"
   },
