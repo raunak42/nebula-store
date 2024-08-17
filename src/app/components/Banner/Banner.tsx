@@ -1,10 +1,17 @@
 "use client";
 import { TextAnimator } from "@/app/animators/TextAnimator/TextAnimator";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import banner47 from "@/../public/banner47.png"
 
 export const Banner: React.FC = () => {
   return (
-    <div className="relative w-full flex items-center justify-center">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="relative w-full flex items-center justify-center"
+    >
       <div className="absolute inset-0 w-full flex items-center justify-center">
         <div className="w-[60%]">
           <TextAnimator
@@ -14,7 +21,7 @@ export const Banner: React.FC = () => {
           />
         </div>
       </div>
-      <Image height={100} width={1600} alt="img" src={"/banner47.png"} />
-    </div>
+      <Image placeholder="blur" height={100} width={1600} alt="img" src={banner47} />
+    </motion.div>
   );
 };
