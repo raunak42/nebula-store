@@ -1,22 +1,41 @@
+"use client";
+import { TextAnimator } from "@/app/animators/TextAnimator/TextAnimator";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import NextTopLoader from "nextjs-toploader";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full h-[380px] bg-gray-200 mt-[40px] flex flex-col items-center justify-between p-[24px]">
+    <motion.footer
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="w-full h-[380px] bg-gray-200 mt-[40px] flex flex-col items-center justify-between p-[24px]"
+    >
+      <NextTopLoader color="#000000" showSpinner={false} height={4} />
+
       <div className="flex flex-col items-center justify-center gap-[16px]">
-        <h1 className="text-4xl font-semibold">Subscribe to the Newsletter</h1>
-        <h3>
-          Never miss out on exclusive merchandise drops and limited collections
-          ever again!
-        </h3>
+        {/* <h1 className="text-4xl font-semibold">Subscribe to the Newsletter</h1> */}
+        <TextAnimator
+          classname="text-4xl font-semibold"
+          text="Subscribe to the Newsletter"
+          space={10}
+        />
+        <TextAnimator
+          classname=""
+          text="Never miss out on exclusive merchandise drops and limited collections
+          ever again!"
+          space={5}
+        />
+        <h3></h3>
       </div>
       <div className="border border-b rounded-md px-[12px] w-[600px] h-[50px] flex items-center justify-between bg-white">
         <input
           className="outline-none  w-[90%]"
           placeholder="email@example.com"
         ></input>
-        <button className=" w-[10%] flex items-center justify-center" >
+        <button className=" w-[10%] flex items-center justify-center">
           {" "}
           <Image alt="img" width={24} height={24} src={"/arrowRight.svg"} />
         </button>
@@ -44,6 +63,6 @@ export const Footer: React.FC = () => {
           </Link>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
