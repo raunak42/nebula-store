@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Loading: React.FC = () => {
+export const Loading: React.FC = () => {
   return (
     <div className="w-full h-[100vh] flex items-center justify-center">
       <Image
