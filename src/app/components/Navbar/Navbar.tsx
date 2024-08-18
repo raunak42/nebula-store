@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
-  futureClickedState,
-  galacticClickedState,
-  moreClickedState,
-  quantumClickedState,
+  calculateCartItemsState,
   showNotificationState,
+  showSideBarState,
   userDetailsState,
 } from "@/store";
 import { Session } from "lucia";
-import { PrismaUserOutput } from "@/app/utils/types";
+import { ApiDataAttributes, PrismaUserOutput } from "@/app/utils/types";
+import { Menu } from "./Menu";
+import { BASE_URL } from "@/app/utils/constants";
 
 interface NavbarProps {
   session: Session | null;
@@ -21,41 +21,46 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
   const [shrink, setShrink] = useState<boolean>(false);
-  const [user, setUser] = useRecoilState(userDetailsState);
-
-  const setQuantumClicked = useSetRecoilState(quantumClickedState);
-  const setFutureClicked = useSetRecoilState(futureClickedState);
-  const setGalacticClicked = useSetRecoilState(galacticClickedState);
-  const setMoreClicked = useSetRecoilState(moreClickedState);
   const setShowNotification = useSetRecoilState(showNotificationState);
+  const [showSidebar, setShowSidebar] = useRecoilState(showSideBarState);
+  const [user, setUser] = useRecoilState(userDetailsState);
+  const [showSpinner, setShowSpinner] = useState<boolean>(false);
+  const [calculateCartItems, setCalculateCartItems] = useRecoilState(
+    calculateCartItemsState
+  );
+  const [showCartSpinner, setShowCartSpinner] = useState<boolean>(false);
 
   const router = useRouter();
   const currentLocation = usePathname();
   const homeLocation = "/";
 
-  const onScroll = () => {
-    const restoreClickedState = () => {
-      setQuantumClicked(false);
-      setFutureClicked(false);
-      setGalacticClicked(false);
-      setMoreClicked(false);
-    };
-
-    restoreClickedState();
-
-    const currentYPosition = window.scrollY;
-    if (currentYPosition > 0) {
-      setShrink(true);
-    }
-    if (currentYPosition < 40) {
-      setShrink(false);
-    }
-  };
+  useEffect(() => {
+    setUser(userDetails);
+  }, [setUser, userDetails]);
 
   useEffect(() => {
-    window.addEventListener("scroll", onScroll);
-    setUser(userDetails);
-  });
+    if (!user) {
+      return;
+    }
+
+    const getUserDetails = async () => {
+      setShowCartSpinner(true);
+      const res = await fetch(`${BASE_URL}/api/getUserDetails`, {
+        method: "POST",
+        cache: "no-store",
+        body: JSON.stringify({ userId: user.id }),
+      });
+      const data: ApiDataAttributes = await res.json();
+      if (data.user) {
+        setUser(data.user);
+        setShowCartSpinner(false);
+      }
+    };
+    if (calculateCartItems) {
+      getUserDetails();
+      setCalculateCartItems(false);
+    }
+  }, [user, setUser, calculateCartItems, setCalculateCartItems]);
 
   return (
     <div
@@ -64,125 +69,159 @@ export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
       }  `}
     >
       <div
-        className={` w-full shadow-md px-[12px] transition-all duration-700 ease-in-out ${
+        className={` w-full shadow-md px-[32px] md:px-[64px] transition-all duration-700 ease-in-out ${
           shrink
             ? `h-[60px] rounded-full border-[1.5px] border-black  `
             : "h-[80px] rounded-none border-none"
         } flex items-center justify-between  backdrop-filter backdrop-blur-md  bg-clip-padding bg-white bg-opacity-10 dark:bg-black dark:bg-opacity-70`}
       >
-        <div className=" w-[40%] flex items-center justify-center">
-          <div className="flex items-center justify-center gap-[24px] text-xs">
-            <button
-              onClick={() => {
-                window?.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className=" hover:underline cursor-pointer"
-            >
-              Home
-            </button>
-            <button
-              onClick={() => {
-                if (currentLocation !== homeLocation) {
-                  localStorage.setItem("scroll-to", "quantum");
-                  window.location.assign(homeLocation); //router.push() will take you to the cached version of the page whereas, w.l.a() will take you to the page and re-render it, we want it to re-render for everything to run smoothly.
-                } else {
-                  setQuantumClicked(true);
-                }
-              }}
-              className=" hover:underline cursor-pointer"
-            >
-              Quantum Dive
-            </button>
-            <button
-              onClick={() => {
-                if (currentLocation !== homeLocation) {
-                  localStorage.setItem("scroll-to", "future");
-                  window.location.assign(homeLocation); //router.push() will take you to the cached version of the page whereas, w.l.a() will take you to the page and re-render it, we want it to re-render for everything to run smoothly.
-                } else {
-                  setFutureClicked(true);
-                }
-              }}
-              className=" hover:underline cursor-pointer"
-            >
-              Human Future
-            </button>
-            <button
-              onClick={() => {
-                if (currentLocation !== homeLocation) {
-                  localStorage.setItem("scroll-to", "galactic");
-                  window.location.assign(homeLocation); //router.push() will take you to the cached version of the page whereas, w.l.a() will take you to the page and re-render it, we want it to re-render for everything to run smoothly.
-                } else {
-                  setGalacticClicked(true);
-                }
-              }}
-              className=" hover:underline cursor-pointer"
-            >
-              Galactic Urbanite
-            </button>
-            <button
-              onClick={() => {
-                if (currentLocation !== homeLocation) {
-                  localStorage.setItem("scroll-to", "more");
-                  window.location.assign(homeLocation); //router.push() will take you to the cached version of the page whereas, w.l.a() will take you to the page and re-render it, we want it to re-render for everything to run smoothly.
-                } else {
-                  setMoreClicked(true);
-                }
-              }}
-              className=" hover:underline cursor-pointer"
-            >
-              More
-            </button>
+        <div className=" w-[48%]  h-full flex items-center justify-between gap-[24px] md:gap-[48px] ">
+          <button
+            onClick={() => {
+              setShowSidebar(true);
+            }}
+            className=" visible xl:hidden"
+          >
+            <Image alt="" width={26} height={26} src={"/hamburger.svg"} />
+          </button>
+          <div
+            onClick={() => {
+              if (currentLocation !== homeLocation) {
+                setShowSpinner(true)
+              }
+            }}
+            className="hidden xl:flex items-center justify-center  text-xs"
+          >
+            <Menu
+              shrink={shrink}
+              setShrink={setShrink}
+              className="flex items-center justify-center gap-[24px] text-xs"
+            />
           </div>
+          {showSpinner && (
+            <Image
+              alt=""
+              width={24}
+              height={24}
+              src={"/spinner.svg"}
+              className="animate-spin"
+            />
+          )}
         </div>
-        <button
-          onClick={() => {
-            if (currentLocation !== homeLocation) {
-              router.push(homeLocation);
-            } else {
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-          }}
-          className="w-fit flex items-center justify-center"
+        <div className="w-[20%] h-full  flex items-center justify-center">
+          <button
+            onClick={() => {
+              if (currentLocation !== homeLocation) {
+                router.push(homeLocation);
+              } else {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+            className="w-fit flex items-center justify-center  "
+          >
+            <Image
+              className="transition-all duration-300"
+              alt="img"
+              width={shrink ? 50 : 60}
+              height={shrink ? 50 : 60}
+              src={"/brandmark-black.svg"}
+            />
+          </button>
+        </div>
+
+        <div
+          className={`w-[45%] h-full flex items-center justify-end   ${
+            session ? "gap-[12px] md:gap-[48px]" : "gap-[12px] md:gap-[48px]"
+          } `}
         >
-          <Image
-            className="transition-all duration-300"
-            alt="img"
-            width={shrink ? 50 : 60}
-            height={shrink ? 50 : 60}
-            src={"/brandmark-black.svg"}
-          />
-        </button>
-        <div className="w-[40%] flex items-center justify-center gap-[24px]">
           <button
             onClick={() => {
               if (!session) {
                 setShowNotification(true);
               } else {
+                setShowSpinner(true);
                 window.location.assign("/cart");
               }
             }}
-            className=" w-[10%] flex items-center justify-center "
+            className="relative "
           >
-            <Image alt="img" width={30} height={30} src={"/cart.svg"} />
+            <Image
+              className="hidden md:block"
+              alt="img"
+              width={30}
+              height={30}
+              src={"/cart.svg"}
+            />
+            <Image
+              className="visible md:hidden"
+              alt="img"
+              width={24}
+              height={24}
+              src={"/cart.svg"}
+            />
+            {user && (
+              <div className="absolute inset-0 h-full w-full  flex items-start justify-end ">
+                <div className="rounded-full size-[18px] bg-black flex items-center justify-center text-white text-xs">
+                  {showCartSpinner ? (
+                    <Image
+                      className="animate-spin"
+                      alt=""
+                      width={16}
+                      height={16}
+                      src={"/spinner-white.svg"}
+                    />
+                  ) : (
+                    <h1>{user?.cart?.length}</h1>
+                  )}
+                </div>
+              </div>
+            )}
           </button>
           <button
             onClick={() => {
               if (!session) {
                 setShowNotification(true);
+              } else {
+                setShowSpinner(true);
+                window.location.assign("/cart");
               }
             }}
-            className=" w-[10%] flex items-center justify-center "
+            className=" "
           >
             {!session ? (
-              <Image alt="img" width={32} height={32} src={"/user.svg"} />
+              <div>
+                <Image
+                  className="hidden md:block"
+                  alt="img"
+                  width={32}
+                  height={32}
+                  src={"/user.svg"}
+                />
+                <Image
+                  className="visible md:hidden"
+                  alt="img"
+                  width={28}
+                  height={28}
+                  src={"/user.svg"}
+                />
+              </div>
             ) : (
-              <Image
-                className="rounded-full"
-                alt="img"
-                width={32}
-                height={32}
-                src={userDetails.avatar!}
-              />
+              <div>
+                <Image
+                  className="hidden md:block rounded-full"
+                  alt="img"
+                  width={32}
+                  height={32}
+                  src={userDetails?.avatar!}
+                />
+                <Image
+                  className="visible md:hidden rounded-full"
+                  alt="img"
+                  width={28}
+                  height={28}
+                  src={userDetails?.avatar!}
+                />
+              </div>
             )}
           </button>
         </div>
