@@ -24,14 +24,14 @@ export const Notification: React.FC<NotificationProps> = ({
   );
   const quantity = useRecoilValue(productQtyState);
   return (
-    <div className={`w-full flex items-start justify-end `}>
+    <div className={`w-full flex items-start justify-end bg-red-200`}>
       <div
-        className={`z-10 w-[340px]  border bg-white rounded-sm shadow-2xl mt-[-300px] fixed top-[12px] right-[96px] flex flex-col items-center justify-start ${
+        className={`z-10   border bg-white rounded-sm shadow-2xl mt-[-300px] fixed top-[12px]  md:right-[96px] right-[12px] flex flex-col items-center justify-start ${
           session
-            ? "gap-[32px] p-[24px] h-[360px]"
-            : "gap-[16px] py-[4px] px-[24px] h-[180px]"
+            ? "gap-[32px] w-[340px] p-[24px] h-[360px]"
+            : "gap-[8px] md:gap-[16px] w-[280px] h-[120px] md:w-[340px] py-[4px] px-[24px] md:h-[180px]"
         } transition-all duration-300 ease-in-out ${
-          showNotification ? "opacity-100 translate-y-[380px] " : " opacity-0"
+          showNotification ? "opacity-100 translate-y-[400px] " : " opacity-0"
         }  `}
       >
         <div
@@ -58,7 +58,14 @@ export const Notification: React.FC<NotificationProps> = ({
         {session ? (
           <>
             <div className=" h-[200px] w-full flex items-start justify-start gap-[24px]">
-              <Image alt="" width={60} height={60} src={product?.imageLink!} />
+              {product && (
+                <Image
+                  alt=""
+                  width={60}
+                  height={60}
+                  src={product?.imageLink!}
+                />
+              )}
               <div className="flex flex-col gap-[4px] w-[50%]">
                 <h1 className="text-sm">{product?.name}</h1>
                 <h1 className="text-sm">₹ {product?.price}.00</h1>
@@ -87,22 +94,29 @@ export const Notification: React.FC<NotificationProps> = ({
             </div>
           </>
         ) : (
-          <div className="flex flex-col gap-[12px]">
+          <div className="flex flex-col gap-[8px] md:gap-[12px]">
             <div className="flex flex-col">
-              <h1 className="text-2xl">You need to log in first.</h1>
+              <h1 className="text-sm text-center md:text-2xl">You need to log in first.</h1>
             </div>
             <Link
               href={"/login/google"}
-              className="shadow-xl rounded-full flex items-center justify-center w-full  border-[1.5px] hover:border-[2px] border-black"
+              className="shadow-xl rounded-full flex items-center justify-center w-[180px] h-[30px] md:h-fit md:w-full  border-[1.5px] hover:border-[2px] border-black"
             >
               <Image
-                className=""
+                className="visible md:hidden"
+                alt="google"
+                height={28}
+                width={28}
+                src={"/google.svg"}
+              />
+              <Image
+                className="hidden md:block"
                 alt="google"
                 height={42}
                 width={42}
                 src={"/google.svg"}
               />
-              <h1>Continue with google</h1>
+              <h1 className="md:text-base text-xs" >Continue with google</h1>
             </Link>
           </div>
         )}
