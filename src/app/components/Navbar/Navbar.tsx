@@ -9,24 +9,24 @@ import {
   moreClickedState,
   quantumClickedState,
   showNotificationState,
+  userDetailsState,
 } from "@/store";
-import { Session, User } from "lucia";
+import { Session } from "lucia";
+import { PrismaUserOutput } from "@/app/utils/types";
 
 interface NavbarProps {
   session: Session | null;
-  user: User | null;
+  userDetails: PrismaUserOutput;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ session, user }) => {
+export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
   const [shrink, setShrink] = useState<boolean>(false);
+  const [user, setUser] = useRecoilState(userDetailsState);
 
-  const [quantumCLicked, setQuantumClicked] =
-    useRecoilState(quantumClickedState);
-  const [futureClicked, setFutureClicked] = useRecoilState(futureClickedState);
-  const [galacticClicked, setGalacticClicked] =
-    useRecoilState(galacticClickedState);
-  const [moreClicked, setMoreClicked] = useRecoilState(moreClickedState);
-
+  const setQuantumClicked = useSetRecoilState(quantumClickedState);
+  const setFutureClicked = useSetRecoilState(futureClickedState);
+  const setGalacticClicked = useSetRecoilState(galacticClickedState);
+  const setMoreClicked = useSetRecoilState(moreClickedState);
   const setShowNotification = useSetRecoilState(showNotificationState);
 
   const router = useRouter();
@@ -54,16 +54,17 @@ export const Navbar: React.FC<NavbarProps> = ({ session, user }) => {
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
+    setUser(userDetails);
   });
 
   return (
     <div
-      className={`z-10 fixed top-0 w-full flex items-center justify-center transition-all duration-700 ease-in-out ${
+      className={`z-20 fixed top-0 w-full flex items-center justify-center transition-all duration-700 ease-in-out ${
         shrink && "p-[32px]"
       }  `}
     >
       <div
-        className={` w-full shadow-2xl px-[12px] transition-all duration-700 ease-in-out ${
+        className={` w-full shadow-md px-[12px] transition-all duration-700 ease-in-out ${
           shrink
             ? `h-[60px] rounded-full border-[1.5px] border-black  `
             : "h-[80px] rounded-none border-none"
@@ -156,17 +157,33 @@ export const Navbar: React.FC<NavbarProps> = ({ session, user }) => {
             onClick={() => {
               if (!session) {
                 setShowNotification(true);
+              } else {
+                window.location.assign("/cart");
               }
             }}
-            className=" w-[10%] flex items-center justify-center"
+            className=" w-[10%] flex items-center justify-center "
           >
             <Image alt="img" width={30} height={30} src={"/cart.svg"} />
           </button>
           <button
-            onClick={() => setShowNotification(true)}
-            className=" w-[10%] flex items-center justify-center"
+            onClick={() => {
+              if (!session) {
+                setShowNotification(true);
+              }
+            }}
+            className=" w-[10%] flex items-center justify-center "
           >
-            <Image alt="img" width={32} height={32} src={"/user.svg"} />
+            {!session ? (
+              <Image alt="img" width={32} height={32} src={"/user.svg"} />
+            ) : (
+              <Image
+                className="rounded-full"
+                alt="img"
+                width={32}
+                height={32}
+                src={userDetails.avatar!}
+              />
+            )}
           </button>
         </div>
       </div>
