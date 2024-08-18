@@ -96,17 +96,25 @@ export default function Page() {
             })}
           </div>
         </div>
-        {showGTSpinner ? (
-          <Image
-            alt=""
-            className="animate-spin"
-            width={18}
-            height={18}
-            src={"/spinner.svg"}
-          />
-        ) : (
-          <h1 className="text-4xl">₹ {grandTotal}.00</h1>
-        )}
+        <div className="w-full flex flex-col items-end justify-start gap-[32px]  mx-[48px]">
+          <div className="flex items-start w-[400px] justify-between  ">
+            <h1 className="text-2xl">Estimated total:</h1>
+            {showGTSpinner ? (
+              <div className="w-[60px] flex items-start justify-center">
+                <Image
+                  alt=""
+                  className="animate-spin"
+                  width={36}
+                  height={36}
+                  src={"/spinner.svg"}
+                />
+              </div>
+            ) : (
+              <h1 className="text-2xl font-semibold"> ₹ {grandTotal}.00</h1>
+            )}
+          </div>
+          <button className="w-[300px] h-[50px] bg-black rounded-full text-white text-xl" >Checkout</button>
+        </div>
       </div>
     </div>
   );
