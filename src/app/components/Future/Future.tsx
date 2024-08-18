@@ -46,10 +46,10 @@ export const Future: React.FC<FutureProps> = ({ items,session }) => {
   return (
     <div ref={futureRef} id="future" className="flex flex-col items-center">
       <div className="w-full flex flex-col items-center justify-center gap-[8px]">
-        <h1 className="text-5xl">The Human Future:</h1>
-        <h3 className="text-2xl">Time Travellers Collection</h3>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl">The Human Future:</h1>
+        <h3 className="text-xl sm:text-2xl">Time Travellers Collection</h3>
       </div>
-      <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[12px] mt-[16px] px-[12px] ">
+      <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[16px] lg:gap-[12px] mt-[16px] px-[12px] ">
         {items.map((item, index) => {
           return <ProductCard session={session} index={index} product={item} key={index} />;
         })}
