@@ -63,7 +63,7 @@ export const Galactic: React.FC<GalacticProps> = ({ items, session }) => {
         <div className="absolute inset-0 w-full flex items-center justify-center">
           <h1 className=" w-[70%] ">
             <TextAnimator
-              classname="text-8xl text-[#ffffff] text-shadow font-semibold flex justify-center"
+              classname="text-3xl sm:text-6xl lg:text-8xl text-[#ffffff] text-shadow font-semibold flex justify-center"
               space={20}
               text="The Galactic Urbanite Collection."
             />
@@ -75,17 +75,17 @@ export const Galactic: React.FC<GalacticProps> = ({ items, session }) => {
         <div className="flex flex-col items-center">
           <div className="w-full flex flex-col items-center justify-center gap-[8px]">
             <TextAnimator
-              classname="text-5xl "
+              classname="text-3xl sm:text-4xl md:text-5xl "
               text="A Long Time Ago:"
               space={10}
             />
             <TextAnimator
-              classname="text-2xl "
+              classname="text-xl sm:text-2xl "
               text="In a Galaxy Far, Far Away"
               space={10}
             />
           </div>
-          <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[12px] mt-[16px] px-[12px] ">
+          <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[16px] lg:gap-[12px] mt-[16px] px-[12px] ">
             {items.map((item, index) => {
               return (
                 <ProductCard
