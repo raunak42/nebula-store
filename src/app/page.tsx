@@ -7,11 +7,12 @@ import { Galactic } from "./components/Galactic/Galactic";
 import { FeaturedProduct } from "./components/FeaturedProduct/FeaturedProduct";
 import { Highlights } from "./components/Highlights/HIghlights";
 import { Banner } from "./components/Banner/Banner";
+import { validateRequest } from "@/auth";
 
 export default async function Home() {
-  const res = await fetch(`${BASE_URL}/api/getAllProducts`,{
-    method:"GET",
-    cache:"no-store"
+  const res = await fetch(`${BASE_URL}/api/getAllProducts`, {
+    method: "GET",
+    cache: "no-store",
   });
   const data: ApiDataAttributes = await res.json();
   const products = data.products!;
@@ -32,6 +33,8 @@ export default async function Home() {
     (item) => item.theme == "Highlights"
   );
 
+  const { session, user } = await validateRequest();
+
   const martianKeyboard = products.find((item) => item.id == 1130);
 
   if (products.length === 0) {
@@ -40,12 +43,12 @@ export default async function Home() {
 
   return (
     <div className={`w-full flex flex-col gap-[80px] mt-[76px]`}>
-      <Banner/>
-      <Quantum items={quantumCollection} />
-      <Future items={futureCollection} />
-      <Galactic items={galacticCollection} />
-      <FeaturedProduct item={martianKeyboard!} />
-      <Highlights items={highlightsCollection} />
+      <Banner />
+      <Quantum session={session} items={quantumCollection} />
+      <Future session={session}  items={futureCollection} />
+      <Galactic session={session}  items={galacticCollection} />
+      <FeaturedProduct  item={martianKeyboard!} />
+      <Highlights session={session}  items={highlightsCollection} />
     </div>
   );
 }
