@@ -3,6 +3,7 @@ import { AddToCartParams } from "@/app/api/addToCart/route";
 import { BASE_URL } from "@/app/utils/constants";
 import { ApiDataAttributes, PrismaProductOutput } from "@/app/utils/types";
 import {
+  calculateCartItemsState,
   productDetailsState,
   productQtyState,
   showNotificationState,
@@ -25,6 +26,9 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({
   const [quantity, setQuantity] = useRecoilState<number>(productQtyState);
   const setShowNotification = useSetRecoilState(showNotificationState);
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
+  const [calculateCartItems, setCalculateCartItems] = useRecoilState(
+    calculateCartItemsState
+  );
 
   const addToCart = async () => {
     const body: AddToCartParams = {
@@ -42,13 +46,14 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({
     if (data.message === "Success") {
       setShowNotification(true);
       setShowSpinner(false);
+      setCalculateCartItems(true);
     }
   };
 
   return (
     <div className="w-[70%] flex flex-col gap-[12px]">
       <div className="flex flex-col gap-[12px]">
-        <h1 className="text-4xl font-semibold">{product?.name}:</h1>
+        <h1 className="md:text-4xl text-2xl font-semibold">{product?.name}:</h1>
         <ul>
           {product?.specifications?.map((spec, index) => {
             return <h1 key={index}>• {spec}</h1>;
@@ -80,9 +85,13 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({
         </div>
         <button
           onClick={() => {
-            setShowSpinner(true);
-            addToCart();
-            setProductDetails(product);
+            if (session) {
+              setShowSpinner(true);
+              addToCart();
+              setProductDetails(product);
+            } else {
+              setShowNotification(true);
+            }
           }}
           className="h-[40px] w-[300px] bg-black flex items-center justify-center rounded-sm"
         >
