@@ -12,7 +12,7 @@ interface QuantumProps {
   session: Session | null;
 }
 
-export const Quantum: React.FC<QuantumProps> = ({ items,session }) => {
+export const Quantum: React.FC<QuantumProps> = ({ items, session }) => {
   const quantumRef = useRef<HTMLDivElement | null>(null);
   const [quantumClicked, setQuantumClicked] =
     useRecoilState(quantumClickedState);
@@ -49,19 +49,26 @@ export const Quantum: React.FC<QuantumProps> = ({ items,session }) => {
     <div ref={quantumRef} id="quantum" className="mt-[-60px]">
       <div className="w-full flex flex-col items-center justify-center gap-[8px]">
         <TextAnimator
-          classname="text-5xl "
+          classname="text-3xl sm:text-4xl md:text-5xl "
           text="The Quantum Dive:"
           space={10}
         />
         <TextAnimator
-          classname="text-2xl "
+          classname=" text-xl sm:text-2xl "
           text="Ultimate Collection"
           space={10}
         />
       </div>
-      <div className=" w-full flex flex-row flex-wrap items-center justify-between px-[24px] mt-[16px] ">
+      <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[16px] lg:gap-0 lg:justify-between sm:px-[24px] mt-[16px] ">
         {items.map((item, index) => {
-          return <ProductCard session={session} index={index} product={item} key={index} />;
+          return (
+            <ProductCard
+              session={session}
+              index={index}
+              product={item}
+              key={index}
+            />
+          );
         })}
       </div>
     </div>
