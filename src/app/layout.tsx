@@ -10,6 +10,8 @@ import { validateRequest } from "@/auth";
 import { BASE_URL } from "./utils/constants";
 import { GetUserApiBodyProps } from "./api/getUserDetails/route";
 import { ApiDataAttributes } from "./utils/types";
+import { ModalBG } from "./components/ModalBg/ModalBg";
+import { Sidebar } from "./components/Sidebar/Sidebar";
 
 const montserrat = Montserrat({ subsets: ["latin"], display: "swap" });
 
@@ -45,6 +47,8 @@ export default async function RootLayout({
         <RecoilWrapper>
           <body className={`${montserrat.className}  dark:text-white`}>
             <Navbar userDetails={userDetails!} session={session} />
+            <ModalBG />
+            <Sidebar session={session} userDetails={userDetails!} />
             <Notification session={session} user={user} />
             <div className="dark:bg-[#000000]"> {children}</div>
             <Footer />

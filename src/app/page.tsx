@@ -1,4 +1,3 @@
-import axios from "axios";
 import { BASE_URL } from "./utils/constants";
 import { ApiDataAttributes } from "./utils/types";
 import { Quantum } from "./components/Quantum/Quantum";
@@ -45,10 +44,10 @@ export default async function Home() {
     <div className={`w-full flex flex-col gap-[80px] mt-[76px]`}>
       <Banner />
       <Quantum session={session} items={quantumCollection} />
-      <Future session={session}  items={futureCollection} />
-      <Galactic session={session}  items={galacticCollection} />
-      <FeaturedProduct  item={martianKeyboard!} />
-      <Highlights session={session}  items={highlightsCollection} />
+      <FeaturedProduct item={martianKeyboard!} />
+      <Future session={session} items={futureCollection} />
+      <Galactic session={session} items={galacticCollection} />
+      <Highlights session={session} items={highlightsCollection} />
     </div>
   );
 }
