@@ -4,12 +4,14 @@ import { ProductCard } from "../ProductCard.tsx/ProductCard";
 import { useRecoilState } from "recoil";
 import { futureClickedState } from "@/store";
 import { useEffect, useRef, useState } from "react";
+import { Session } from "lucia";
 
 interface FutureProps {
   items: PrismaProductOutput[];
+  session: Session | null;
 }
 
-export const Future: React.FC<FutureProps> = ({ items }) => {
+export const Future: React.FC<FutureProps> = ({ items,session }) => {
   const futureRef = useRef<HTMLDivElement | null>(null);
   const [futureClicked, setFutureClicked] = useRecoilState(futureClickedState);
   const [isIntersecting, setIsIntersecting] = useState(false);
@@ -49,7 +51,7 @@ export const Future: React.FC<FutureProps> = ({ items }) => {
       </div>
       <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[12px] mt-[16px] px-[12px] ">
         {items.map((item, index) => {
-          return <ProductCard index={index} product={item} key={index} />;
+          return <ProductCard session={session} index={index} product={item} key={index} />;
         })}
       </div>
     </div>
