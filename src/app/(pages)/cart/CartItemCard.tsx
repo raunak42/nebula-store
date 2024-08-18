@@ -12,7 +12,12 @@ import { RemoveBodyParams } from "@/app/api/removeFromCart/route";
 import { AddToCartParams } from "@/app/api/addToCart/route";
 import { RemoveOneBodyParams } from "@/app/api/removeOneFromCart/route";
 import { useRecoilState } from "recoil";
-import { showGTSpinnerState } from "@/store";
+import {
+  calculateCartItemsState,
+  recalculateGTState,
+  showGTSpinnerState,
+} from "@/store";
+import Link from "next/link";
 
 interface CartItemCardProps {
   item: PrismaProductOutput;
@@ -28,6 +33,10 @@ export const CartItemCard: React.FC<CartItemCardProps> = ({ item, user }) => {
   const [disableButton, setDisableButton] = useState<boolean>(false);
   const [userData, setUserData] = useState<PrismaUserOutput | null>(user);
   const [showGTSpinner, setShowGTSpinner] = useRecoilState(showGTSpinnerState);
+  const [recalculateGT, setRecalculateGT] = useRecoilState(recalculateGTState);
+  const [calculateCartItems, setCalculateCartItems] = useRecoilState(
+    calculateCartItemsState
+  );
 
   useEffect(() => {
     const totalUnique = getOccurence(userData!, item);
@@ -51,7 +60,9 @@ export const CartItemCard: React.FC<CartItemCardProps> = ({ item, user }) => {
     const data: ApiDataAttributes = await res.json();
     console.log(data.message);
     if (data.message === "Success") {
-      setHideCard(true);
+      setRecalculateGT(true);
+      setCalculateCartItems(true);
+      setShowBinSpinner(false)
     }
   };
 
@@ -75,6 +86,8 @@ export const CartItemCard: React.FC<CartItemCardProps> = ({ item, user }) => {
       setItemTotal(item.price! * qty);
       setShowTotalSpinner(false);
       setDisableButton(false);
+      setRecalculateGT(true);
+      setCalculateCartItems(true);
     }
   };
 
@@ -96,6 +109,8 @@ export const CartItemCard: React.FC<CartItemCardProps> = ({ item, user }) => {
       setItemTotal(item.price! * qty);
       setShowTotalSpinner(false);
       setDisableButton(false);
+      setRecalculateGT(true);
+      setCalculateCartItems(true);
     }
   };
 
@@ -106,18 +121,21 @@ export const CartItemCard: React.FC<CartItemCardProps> = ({ item, user }) => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        className="flex items-center justify-between m-[32px]"
+        className="flex  flex-col gap-[24px] items-start lg:flex-row w-full lg:items-center justify-between m-[32px]"
       >
-        <div className="flex items-start justify-start gap-[48px]">
+        <Link
+          href={`product/${item.id}`}
+          className="cursor-pointer flex items-start justify-start gap-[48px] "
+        >
           <Image alt="" width={100} height={100} src={item.imageLink!} />
-          <div className="flex flex-col items-start justify-start gap-[4px]">
-            <h1 className="text-lg ">{item.name}</h1>
+          <div className="flex flex-col items-start justify-start gap-[4px] group">
+            <h1 className="text-lg group-hover:underline ">{item.name}</h1>
             <h1 className="text-sm">₹ {item.price}.00</h1>
             <h1 className="text-sm ">Theme: {item.theme}</h1>
           </div>
-        </div>
+        </Link>
 
-        <div className="flex flex-row items-center justify-between w-[30%]">
+        <div className="flex flex-row items-center justify-between  w-full lg:w-[40%]">
           <div className="flex items-center gap-[12px]">
             <div className="h-[40px] shadow w-[120px] bg-white text-black rounded-none border flex items-center justify-center gap-[18px]">
               <button
