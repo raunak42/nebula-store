@@ -15,13 +15,13 @@ export const Banner: React.FC = () => {
       <div className="absolute inset-0 w-full flex items-center justify-center">
         <div className="w-[60%]">
           <TextAnimator
-            classname="text-8xl text-[#ffffff] text-shadow font-semibold text-center flex items-center justify-center "
+            classname="text-3xl sm:text-6xl lg:text-8xl text-[#ffffff] text-shadow font-semibold text-center flex items-center justify-center "
             text="Own a piece of the future."
             space={20}
           />
         </div>
       </div>
-      <Image placeholder="blur" height={100} width={1600} alt="img" src={banner47} />
+      <Image className="" placeholder="blur" height={100} width={1600} alt="img" src={banner47} />
     </motion.div>
   );
 };
