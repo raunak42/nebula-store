@@ -121,14 +121,6 @@ export default function Page() {
             </div>
           </div>
         </div>
-
-        <div className="w-full flex flex-row items-center justify-center">
-          <div className="flex flex-col w-full h-full border-t border-b lg:p-[24px] items-center ">
-            {uniqueProducts.map((item, index) => {
-              return <CartItemCard user={user} item={item} key={index} />;
-            })}
-          </div>
-        </div>
         <div className="w-full flex flex-col items-start lg:items-end justify-start gap-[32px]  mx-[48px] ">
           <div className="flex items-start w-full lg:w-[400px] justify-between  ">
             <h1 className="text-base lg:text-2xl">Estimated total:</h1>
