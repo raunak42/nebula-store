@@ -87,7 +87,7 @@ export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
           <div
             onClick={() => {
               if (currentLocation !== homeLocation) {
-                setShowSpinner(true)
+                setShowSpinner(true);
               }
             }}
             className="hidden xl:flex items-center justify-center  text-xs"
@@ -179,12 +179,7 @@ export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
           </button>
           <button
             onClick={() => {
-              if (!session) {
-                setShowNotification(true);
-              } else {
-                setShowSpinner(true);
-                window.location.assign("/cart");
-              }
+              setShowSidebar(true);
             }}
             className=" "
           >
