@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { generateId } from "lucia";
 import bcrypt from "bcryptjs";
 import { emailInput, passwordInput } from "./zod";
+import { PrismaProductOutput, PrismaUserOutput } from "../utils/types";
 
 
 export const populateDb = async () => {
@@ -112,7 +113,7 @@ export const startSession = async (userId: string) => {
     return redirect("/home");
 }
 
-export const logout = async ():Promise<ActionResult> => {
+export const logout = async (): Promise<ActionResult> => {
     const { session } = await validateRequest();
     if (!session) {
         return {
@@ -134,4 +135,4 @@ export const logout = async ():Promise<ActionResult> => {
 
 interface ActionResult {
     error: string | null;
-  }
+}
