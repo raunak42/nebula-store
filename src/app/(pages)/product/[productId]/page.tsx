@@ -4,6 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import { ProductDetails } from "../ProductDetails";
 import { Recommendations } from "../Recommendations";
+import { validateRequest } from "@/auth";
 
 interface PageParams {
   params: {
@@ -28,6 +29,8 @@ export default async function Page({ params }: PageParams) {
   const data2: ApiDataAttributes = await res2.json();
   const recommendations = data2.products;
 
+  const { session, user } = await validateRequest();
+
   return (
     <div className="flex flex-col items-center justify-start">
       <div className="w-full mt-[80px] h-[100vh]  overflow-hidden  flex items-center justify-center">
@@ -41,7 +44,7 @@ export default async function Page({ params }: PageParams) {
           />
         </div>
         <div className="w-[40%] mt-[200px] h-full  flex flex-col items-start justify-start">
-          <ProductDetails product={product!} />
+          <ProductDetails session={session} product={product!} />
         </div>
       </div>
       <Recommendations products={recommendations!} />
