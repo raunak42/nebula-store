@@ -51,7 +51,7 @@ export const Highlights: React.FC<HighlightsProps> = ({ items, session }) => {
           Explore more products:
         </h1>
       </div>
-      <div className=" w-full flex flex-row flex-wrap items-center justify-between px-[24px] mt-[16px] ">
+      <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[16px] lg:gap-0 lg:justify-between sm:px-[24px] mt-[16px] ">
         {items.map((item, index) => {
           return (
             <ProductCard
