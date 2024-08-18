@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
+  calculateCartItemsState,
   productDetailsState,
   productQtyState,
   showNotificationState,
@@ -13,6 +14,7 @@ import { BASE_URL } from "@/app/utils/constants";
 import { Session } from "lucia";
 import { AddToCartParams } from "@/app/api/addToCart/route";
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 
 interface ProductCardProps {
   product: PrismaProductOutput;
@@ -30,6 +32,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
   const [quantity, setQuantity] = useRecoilState<number>(productQtyState);
   const [disableButton, setDisableButton] = useState<boolean>(false);
+  const [calculateCartItems, setCalculateCartItems] = useRecoilState(
+    calculateCartItemsState
+  );
+
+  const xl = useMediaQuery({ minWidth: 1284 }); //xl breakpoint
+  const lg = useMediaQuery({ minWidth: 1024 }); //lg breakpoint
+  const md = useMediaQuery({ minWidth: 768 }); //md breakpoint
+  const sm = useMediaQuery({ minWidth: 640 }); //sm breakpoint
 
   const addToCart = async () => {
     setQuantity(1);
@@ -49,25 +59,26 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       setShowNotification(true);
       setShowSpinner(false);
       setDisableButton(false);
+      setCalculateCartItems(true)
     }
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
+      initial={sm && { opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
+        initial={sm && { opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.25, delay: 0.1 * index }}
-        className="w-[270px]  h-[440px] gap-[16px]  flex flex-col items-center"
+        className="mt-[16px] sm:w-[270px]  sm:h-[440px] sm:gap-[16px] w-[162px] h-[264px] gap-[6px] flex flex-col items-center"
       >
         <Link
           href={`/product/${product.id}`}
-          className="flex flex-col w-[270px] h-[320px] items-center group cursor-pointer justify-center   "
+          className="flex flex-col sm:w-[270px] sm:h-[320px] w-[162px] h-[192px] items-center group cursor-pointer justify-center   "
         >
           <div className="dark:bg-white overflow-hidden size-[96%] group-hover:size-full group-hover:shadow-2xl rounded-lg ease-in-out  transition-all duration-300 flex items-center justify-center">
             <Image
@@ -85,12 +96,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <button
             disabled={disableButton && true}
             onClick={() => {
-              setShowSpinner(true);
-              setProductDetails(product);
-              setDisableButton(true);
-              addToCart();
+              if (session) {
+                setShowSpinner(true);
+                setProductDetails(product);
+                setDisableButton(true);
+                addToCart();
+              } else {
+                setShowNotification(true);
+              }
             }}
-            className="border-[0.5px] disabled:cursor-not-allowed border-black hover:border-[1px] hover:shadow-lg rounded-sm w-[100px] h-[30px] flex items-center justify-center "
+            className="border-[1px]  disabled:cursor-not-allowed border-black hover:border-[1.5px] hover:shadow-lg rounded-sm w-[100px] h-[30px] flex items-center justify-center "
           >
             {showSpinner ? (
               <Image
@@ -101,7 +116,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 className="animate-spin"
               />
             ) : (
-              <h1 className="text-sm font-light">Add to cart</h1>
+              <h1 className="text-sm ">Add to cart</h1>
             )}
           </button>
         </div>
