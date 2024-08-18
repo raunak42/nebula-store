@@ -7,12 +7,14 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { galacticClickedState } from "@/store";
+import { Session } from "lucia";
 
 interface GalacticProps {
   items: PrismaProductOutput[];
+  session: Session | null;
 }
 
-export const Galactic: React.FC<GalacticProps> = ({ items }) => {
+export const Galactic: React.FC<GalacticProps> = ({ items, session }) => {
   const galacticRef = useRef<HTMLDivElement | null>(null);
   const [galacticClicked, setGalacticClicked] =
     useRecoilState(galacticClickedState);
@@ -44,7 +46,7 @@ export const Galactic: React.FC<GalacticProps> = ({ items }) => {
     return () => {
       if (galacticElement) observer.unobserve(galacticElement);
     };
-  }, [ isIntersecting]);
+  }, [isIntersecting]);
 
   return (
     <div
@@ -85,7 +87,14 @@ export const Galactic: React.FC<GalacticProps> = ({ items }) => {
           </div>
           <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[12px] mt-[16px] px-[12px] ">
             {items.map((item, index) => {
-              return <ProductCard index={index} product={item} key={index} />;
+              return (
+                <ProductCard
+                  session={session}
+                  index={index}
+                  product={item}
+                  key={index}
+                />
+              );
             })}
           </div>
         </div>
