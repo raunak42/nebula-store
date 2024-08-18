@@ -45,3 +45,18 @@ export const showGTSpinnerState = atom<boolean>({
     key: "showGTSpinnerState",
     default: false
 })
+
+export const recalculateGTState = atom<boolean>({
+    key: "recalculateGTState",
+    default: false
+})
+
+export const calculateCartItemsState = atom<boolean>({
+    key: "calculateCartItemsState",
+    default: false
+})
+
+export const showSideBarState = atom<boolean>({
+    key: "showSideBarState",
+    default: false
+})
