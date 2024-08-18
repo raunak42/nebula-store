@@ -141,7 +141,7 @@ export default function Page() {
               </h1>
             )}
           </div>
-          <button className="lg:w-[300px] lg:h-[50px] w-[160px] h-[40px] bg-black rounded-full text-white text-xl">
+          <button className="cursor-not-allowed lg:w-[300px] lg:h-[50px] w-[160px] h-[40px] bg-black rounded-full text-white text-xl">
             <h1 className="text-sm lg:text-lg">Check out</h1>
           </button>
         </div>
