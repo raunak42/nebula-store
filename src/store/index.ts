@@ -1,4 +1,4 @@
-import { PrismaProductOutput } from "@/app/utils/types";
+import { PrismaProductOutput, PrismaUserOutput } from "@/app/utils/types";
 import { atom } from "recoil";
 
 export const quantumClickedState = atom<boolean>({
@@ -28,5 +28,20 @@ export const productDetailsState = atom<PrismaProductOutput | null>({
 
 export const showNotificationState = atom<boolean>({
     key: "showNotificationState",
+    default: false
+})
+
+export const productQtyState = atom({
+    key: "productQtyState",
+    default: 1
+})
+
+export const userDetailsState = atom<PrismaUserOutput | null>({
+    key: "userDetailsState",
+    default: null
+})
+
+export const showGTSpinnerState = atom<boolean>({
+    key: "showGTSpinnerState",
     default: false
 })
