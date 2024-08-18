@@ -82,7 +82,7 @@ export const Notification: React.FC<NotificationProps> = ({
               >
                 View cart
               </button>
-              <button className="w-[300px] h-[50px] bg-black rounded-full text-white">
+              <button className="cursor-not-allowed w-[300px] h-[50px] bg-black rounded-full text-white">
                 Check out
               </button>
               <h1
