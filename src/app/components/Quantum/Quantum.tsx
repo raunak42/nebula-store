@@ -5,18 +5,19 @@ import { TextAnimator } from "@/app/animators/TextAnimator/TextAnimator";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { quantumClickedState } from "@/store";
+import { Session, User } from "lucia";
 
 interface QuantumProps {
   items: PrismaProductOutput[];
+  session: Session | null;
 }
 
-export const Quantum: React.FC<QuantumProps> = ({ items }) => {
+export const Quantum: React.FC<QuantumProps> = ({ items,session }) => {
   const quantumRef = useRef<HTMLDivElement | null>(null);
   const [quantumClicked, setQuantumClicked] =
     useRecoilState(quantumClickedState);
   const [isIntersecting, setIsIntersecting] = useState(false);
 
-  
   useEffect(() => {
     const quantumElement = quantumRef.current;
     const scrollTo = localStorage.getItem("scroll-to");
@@ -60,7 +61,7 @@ export const Quantum: React.FC<QuantumProps> = ({ items }) => {
       </div>
       <div className=" w-full flex flex-row flex-wrap items-center justify-between px-[24px] mt-[16px] ">
         {items.map((item, index) => {
-          return <ProductCard index={index} product={item} key={index} />;
+          return <ProductCard session={session} index={index} product={item} key={index} />;
         })}
       </div>
     </div>
