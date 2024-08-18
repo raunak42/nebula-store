@@ -14,7 +14,7 @@ export const Recommendations: React.FC<RecommendationsProps> = async({
       <h1 className="text-4xl text-center w-full p-[24px]">
         You may also like:
       </h1>
-      <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[60px] px-[24px] mt-[16px] ">
+      <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[16px] lg:gap-0 lg:justify-between sm:px-[24px] mt-[16px] ">
         {products.map((item, index) => {
           return <ProductCard session={session} index={index} product={item} key={index} />;
         })}

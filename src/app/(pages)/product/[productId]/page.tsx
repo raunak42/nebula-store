@@ -33,8 +33,8 @@ export default async function Page({ params }: PageParams) {
 
   return (
     <div className="flex flex-col items-center justify-start">
-      <div className="w-full mt-[80px] h-[100vh]  overflow-hidden  flex items-center justify-center">
-        <div className="w-[60%] mt-[200px] h-full flex items-start justify-center ">
+      <div className="w-full mt-[80px] md:h-[100vh]  overflow-hidden  flex flex-col items-center gap-[10px]  md:flex-row md:items-center md:justify-center md:p-0 p-[24px]">
+        <div className="md:w-[60%] md:mt-[200px] h-full flex items-start justify-center ">
           <Image
             className="rounded-sm"
             width={400}
@@ -43,7 +43,7 @@ export default async function Page({ params }: PageParams) {
             src={product?.imageLink!}
           />
         </div>
-        <div className="w-[40%] mt-[200px] h-full  flex flex-col items-start justify-start">
+        <div className="md:w-[40%] md:mt-[200px] h-full  flex flex-col items-start justify-start  md:p-0 p-[24px]">
           <ProductDetails session={session} product={product!} />
         </div>
       </div>
