@@ -4,12 +4,14 @@ import { ProductCard } from "../ProductCard.tsx/ProductCard";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { moreClickedState } from "@/store";
+import { Session } from "lucia";
 
 interface HighlightsProps {
   items: PrismaProductOutput[];
+  session: Session | null;
 }
 
-export const Highlights: React.FC<HighlightsProps> = ({ items }) => {
+export const Highlights: React.FC<HighlightsProps> = ({ items, session }) => {
   const moreRef = useRef<HTMLDivElement | null>(null);
   const [moreClicked, setMoreClicked] = useRecoilState(moreClickedState);
   const [isIntersecting, setIsIntersecting] = useState(false);
@@ -51,7 +53,14 @@ export const Highlights: React.FC<HighlightsProps> = ({ items }) => {
       </div>
       <div className=" w-full flex flex-row flex-wrap items-center justify-between px-[24px] mt-[16px] ">
         {items.map((item, index) => {
-          return <ProductCard index={index} product={item} key={index} />;
+          return (
+            <ProductCard
+              session={session}
+              index={index}
+              product={item}
+              key={index}
+            />
+          );
         })}
       </div>
     </div>
