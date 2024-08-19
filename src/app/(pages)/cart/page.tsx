@@ -83,7 +83,7 @@ export default function Page() {
 
   ///////////////////////////////////////////////////////////////////////////
 
-  if (!uniqueProducts || !grandTotal) {
+  if (!uniqueProducts) {
     return <Loading />;
   }
 
@@ -91,7 +91,13 @@ export default function Page() {
     <div className="w-full h-full px-[32px] lg:px-[128px] py-[24px] lg:py-[64px] flex items-start justify-center mt-[80px]">
       <div className="w-full h-full  flex flex-col items-center justify-start gap-[24px] lg:gap-[48px]">
         <div className="w-full flex items-center justify-between">
-          <h1 className=" text-2xl sm:text-3xl lg:text-4xl">Your cart:</h1>
+          {uniqueProducts.length > 0 ? (
+            <h1 className=" text-2xl sm:text-3xl lg:text-4xl">Your cart:</h1>
+          ) : (
+            <h1 className=" text-2xl sm:text-3xl lg:text-4xl">
+              Your cart is empty
+            </h1>
+          )}
           <Link
             href={"/"}
             className="underline text-sm md:text-base decoration-[1px] hover:decoration-[2px]"
@@ -103,7 +109,7 @@ export default function Page() {
         <div className="flex flex-col w-full">
           <div className="w-full flex items-center justify-between px-[24px] font-light text-sm">
             <h1>Item</h1>
-            <h1 className="hidden sm:block" >Item total</h1>
+            <h1 className="hidden sm:block">Item total</h1>
           </div>
           <div className="w-full flex flex-row items-center justify-center">
             <div className="flex flex-col w-full h-full border-t border-b lg:p-[24px] items-center ">

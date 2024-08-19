@@ -13,7 +13,7 @@ import { ApiDataAttributes } from "./utils/types";
 import { ModalBG } from "./components/ModalBg/ModalBg";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 
-const montserrat = Montserrat({ subsets: ["latin"], display: "swap" });
+const montserrat = Montserrat({ subsets: ["latin"]});
 
 export const metadata: Metadata = {
   title: "Nebula Store",
