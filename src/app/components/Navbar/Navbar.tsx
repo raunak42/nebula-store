@@ -130,9 +130,7 @@ export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
         </div>
 
         <div
-          className={`w-[45%] h-full flex items-center justify-end   ${
-            session ? "gap-[12px] md:gap-[48px]" : "gap-[12px] md:gap-[48px]"
-          } `}
+          className={`w-[45%] h-full flex items-center justify-end gap-[22px] md:gap-[48px] `}
         >
           <button
             onClick={() => {
