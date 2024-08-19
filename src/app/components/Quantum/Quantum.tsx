@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { quantumClickedState } from "@/store";
 import { Session, User } from "lucia";
+import { RowTypeA } from "../RowTypes/RowTypeA";
 
 interface QuantumProps {
   items: PrismaProductOutput[];
@@ -59,18 +60,7 @@ export const Quantum: React.FC<QuantumProps> = ({ items, session }) => {
           space={10}
         />
       </div>
-      <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[16px] lg:gap-0 lg:justify-between sm:px-[24px] mt-[16px] ">
-        {items.map((item, index) => {
-          return (
-            <ProductCard
-              session={session}
-              index={index}
-              product={item}
-              key={index}
-            />
-          );
-        })}
-      </div>
+      <RowTypeA session={session} items={items} />
     </div>
   );
 };

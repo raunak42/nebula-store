@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { galacticClickedState } from "@/store";
 import { Session } from "lucia";
+import { RowTypeB } from "../RowTypes/RowTypeB";
 
 interface GalacticProps {
   items: PrismaProductOutput[];
@@ -85,18 +86,7 @@ export const Galactic: React.FC<GalacticProps> = ({ items, session }) => {
               space={10}
             />
           </div>
-          <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[16px] lg:gap-[12px] mt-[16px] px-[12px] ">
-            {items.map((item, index) => {
-              return (
-                <ProductCard
-                  session={session}
-                  index={index}
-                  product={item}
-                  key={index}
-                />
-              );
-            })}
-          </div>
+          <RowTypeB items={items} session={session} />
         </div>
       </div>
     </div>

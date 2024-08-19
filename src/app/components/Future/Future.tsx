@@ -5,13 +5,14 @@ import { useRecoilState } from "recoil";
 import { futureClickedState } from "@/store";
 import { useEffect, useRef, useState } from "react";
 import { Session } from "lucia";
+import { RowTypeB } from "../RowTypes/RowTypeB";
 
 interface FutureProps {
   items: PrismaProductOutput[];
   session: Session | null;
 }
 
-export const Future: React.FC<FutureProps> = ({ items,session }) => {
+export const Future: React.FC<FutureProps> = ({ items, session }) => {
   const futureRef = useRef<HTMLDivElement | null>(null);
   const [futureClicked, setFutureClicked] = useRecoilState(futureClickedState);
   const [isIntersecting, setIsIntersecting] = useState(false);
@@ -49,11 +50,8 @@ export const Future: React.FC<FutureProps> = ({ items,session }) => {
         <h1 className="text-3xl sm:text-4xl md:text-5xl">The Human Future:</h1>
         <h3 className="text-xl sm:text-2xl">Time Travellers Collection</h3>
       </div>
-      <div className=" w-full flex flex-row flex-wrap items-center justify-center gap-[16px] lg:gap-[12px] mt-[16px] px-[12px] ">
-        {items.map((item, index) => {
-          return <ProductCard session={session} index={index} product={item} key={index} />;
-        })}
-      </div>
+
+      <RowTypeB items={items} session={session} />
     </div>
   );
 };
