@@ -24,9 +24,9 @@ export const Notification: React.FC<NotificationProps> = ({
   );
   const quantity = useRecoilValue(productQtyState);
   return (
-    <div className={`w-full flex items-start justify-end bg-red-200`}>
+    <div className={`w-full flex items-start md:justify-end justify-center px-[64px] relative`}>
       <div
-        className={`z-10   border bg-white rounded-sm shadow-2xl mt-[-300px] fixed top-[12px]  md:right-[96px] right-[12px] flex flex-col items-center justify-start ${
+        className={`z-10   border bg-white rounded-sm shadow-2xl mt-[-300px] fixed top-0 flex flex-col items-center justify-start ${
           session
             ? "gap-[32px] w-[340px] p-[24px] h-[360px]"
             : "gap-[8px] md:gap-[16px] w-[280px] h-[120px] md:w-[340px] py-[4px] px-[24px] md:h-[180px]"
