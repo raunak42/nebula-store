@@ -54,7 +54,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ session, userDetails }) => {
         {!session ? (
           <Link
             href={"/login/google"}
-            className="shadow-xl rounded-full flex items-center justify-center w-[180px] h-[30px] md:h-fit md:w-full  border-[1.5px] hover:border-[2px] border-black"
+            className="shadow-xl rounded-full flex items-center justify-center w-[216px] h-[36px] md:h-fit md:w-full  border-[1.5px] hover:border-[2px] border-black"
           >
             <Image
               className="visible md:hidden"
