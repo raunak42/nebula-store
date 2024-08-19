@@ -103,7 +103,7 @@ export default function Page() {
         <div className="flex flex-col w-full">
           <div className="w-full flex items-center justify-between px-[24px] font-light text-sm">
             <h1>Item</h1>
-            <h1>Item total</h1>
+            <h1 className="hidden sm:block" >Item total</h1>
           </div>
           <div className="w-full flex flex-row items-center justify-center">
             <div className="flex flex-col w-full h-full border-t border-b lg:p-[24px] items-center ">

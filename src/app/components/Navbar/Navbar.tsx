@@ -64,7 +64,7 @@ export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
 
   return (
     <div
-      className={`z-20 fixed top-0 w-full flex items-center justify-center transition-all duration-700 ease-in-out ${
+      className={`z-20 fixed top-0  w-full flex items-center justify-center transition-all duration-700 ease-in-out ${
         shrink && "p-[32px]"
       }  `}
     >
@@ -75,12 +75,12 @@ export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
             : "h-[80px] rounded-none border-none"
         } flex items-center justify-between  backdrop-filter backdrop-blur-md  bg-clip-padding bg-white bg-opacity-10 dark:bg-black dark:bg-opacity-70`}
       >
-        <div className=" w-[48%]  h-full flex items-center justify-between gap-[24px] md:gap-[48px] ">
+        <div className=" w-[45%]  h-full flex items-center justify-between gap-[24px] md:gap-[48px] ">
           <button
             onClick={() => {
               setShowSidebar(true);
             }}
-            className=" visible xl:hidden"
+            className=" visible xl:hidden hover:translate-y-[-4px] transition-all duration-200"
           >
             <Image alt="" width={26} height={26} src={"/hamburger.svg"} />
           </button>
@@ -108,7 +108,7 @@ export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
             />
           )}
         </div>
-        <div className="w-[20%] h-full  flex items-center justify-center">
+        <div className="w-[20%] h-full  flex items-center justify-center  ">
           <button
             onClick={() => {
               if (currentLocation !== homeLocation) {
@@ -117,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
-            className="w-fit flex items-center justify-center  "
+            className="w-fit hover:translate-y-[-4px] transition-all duration-200 flex items-center justify-center  rounded-full "
           >
             <Image
               className="transition-all duration-300"
@@ -141,7 +141,7 @@ export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
                 window.location.assign("/cart");
               }
             }}
-            className="relative "
+            className="relative hover:translate-y-[-4px] transition-all duration-200"
           >
             <Image
               className="hidden md:block"
@@ -179,7 +179,7 @@ export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
             onClick={() => {
               setShowSidebar(true);
             }}
-            className=" "
+            className="hover:translate-y-[-4px] transition-all duration-200 "
           >
             {!session ? (
               <div>

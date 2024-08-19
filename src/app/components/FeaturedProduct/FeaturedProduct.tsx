@@ -82,7 +82,7 @@ export const FeaturedProduct: React.FC<FeatProps> = ({ item }) => {
         </ul>
         <Link
           href={`/product/${item.id}`}
-          className=" w-full sm:w-[60%] mt-[64px] bg-black text-lg text-white p-[12px] rounded-lg flex items-center justify-center"
+          className=" w-full sm:w-[60%] mt-[64px] bg-black text-lg text-white p-[12px] rounded-lg flex items-center justify-center hover:translate-y-[-4px] transition-all duration-200"
         >
           Explore product
         </Link>

@@ -24,14 +24,16 @@ export const Notification: React.FC<NotificationProps> = ({
   );
   const quantity = useRecoilValue(productQtyState);
   return (
-    <div className={`w-full flex items-start md:justify-end justify-center px-[64px] relative`}>
+    <div
+      className={`w-full flex items-start md:justify-end justify-center px-[64px] relative`}
+    >
       <div
-        className={`z-10   border bg-white rounded-sm shadow-2xl mt-[-300px] fixed top-0 flex flex-col items-center justify-start ${
+        className={`z-30   border bg-white rounded-sm  mt-[-360px] fixed top-0 flex flex-col items-center justify-start ${
           session
             ? "gap-[32px] w-[340px] p-[24px] h-[360px]"
-            : "gap-[8px] md:gap-[16px] w-[280px] h-[120px] md:w-[340px] py-[4px] px-[24px] md:h-[180px]"
+            : "gap-[8px] md:gap-[16px] w-[280px] h-[120px] md:w-[340px] py-[8px] px-[24px] md:h-[180px]"
         } transition-all duration-300 ease-in-out ${
-          showNotification ? "opacity-100 translate-y-[400px] " : " opacity-0"
+          showNotification ? "opacity-100 translate-y-[460px] shadow-2xl " : " opacity-100"
         }  `}
       >
         <div
@@ -46,14 +48,26 @@ export const Notification: React.FC<NotificationProps> = ({
             </div>
           )}
           <button
+          className="hover:translate-y-[-4px] transition-all duration-200"
             onClick={() => {
               setShowNotification(false);
               setProduct(null);
             }}
           >
-            <Image alt=""  className="hidden md:block" width={24} height={24} src={"/cross.svg"} />
-            <Image alt=""  className="visible md:hidden" width={18} height={18} src={"/cross.svg"} />
-            
+            <Image
+              alt=""
+              className="hidden md:block"
+              width={24}
+              height={24}
+              src={"/cross.svg"}
+            />
+            <Image
+              alt=""
+              className="visible md:hidden"
+              width={18}
+              height={18}
+              src={"/cross.svg"}
+            />
           </button>
         </div>
 
@@ -80,11 +94,11 @@ export const Notification: React.FC<NotificationProps> = ({
                 onClick={() => {
                   window.location.assign("/cart");
                 }}
-                className="w-[300px] h-[50px] bg-white border-[1.5px] border-black rounded-full"
+                className="w-[300px] h-[50px] bg-white border-[1.5px] border-black rounded-full hover:translate-y-[-4px] transition-all duration-200"
               >
                 View cart
               </button>
-              <button className="cursor-not-allowed w-[300px] h-[50px] bg-black rounded-full text-white">
+              <button className="cursor-not-allowed w-[300px] h-[50px] bg-black rounded-full text-white hover:translate-y-[-4px] transition-all duration-200">
                 Check out
               </button>
               <h1
@@ -98,7 +112,9 @@ export const Notification: React.FC<NotificationProps> = ({
         ) : (
           <div className="flex flex-col gap-[8px] md:gap-[12px]">
             <div className="flex flex-col">
-              <h1 className="text-sm text-center md:text-2xl">You need to log in first.</h1>
+              <h1 className="text-sm text-center md:text-2xl">
+                You need to log in first.
+              </h1>
             </div>
             <Link
               href={"/login/google"}
@@ -118,7 +134,7 @@ export const Notification: React.FC<NotificationProps> = ({
                 width={42}
                 src={"/google.svg"}
               />
-              <h1 className="md:text-base text-xs" >Continue with google</h1>
+              <h1 className="md:text-base text-xs">Continue with google</h1>
             </Link>
           </div>
         )}

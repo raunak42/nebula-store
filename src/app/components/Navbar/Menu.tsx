@@ -51,25 +51,13 @@ export const Menu: React.FC<MenuProps> = ({ shrink, setShrink, className }) => {
       <button
         onClick={() => {
           if (currentLocation !== homeLocation) {
-            window.location.assign("/");
-          } else {
-            window?.scrollTo({ top: 0, behavior: "smooth" });
-          }
-        }}
-        className=" hover:underline cursor-pointer"
-      >
-        Home
-      </button>
-      <button
-        onClick={() => {
-          if (currentLocation !== homeLocation) {
             localStorage.setItem("scroll-to", "quantum");
             window.location.assign(homeLocation); //router.push() will take you to the cached version of the page whereas, w.l.a() will take you to the page and re-render it, we want it to re-render for everything to run smoothly.
           } else {
             setQuantumClicked(true);
           }
         }}
-        className=" hover:underline cursor-pointer"
+        className=" underline hover:decoration-[1.5px] hover:translate-y-[-4px] transition-all duration-200 cursor-pointer"
       >
         Quantum Dive
       </button>
@@ -82,7 +70,7 @@ export const Menu: React.FC<MenuProps> = ({ shrink, setShrink, className }) => {
             setFutureClicked(true);
           }
         }}
-        className=" hover:underline cursor-pointer"
+        className=" underline hover:decoration-[1.5px] hover:translate-y-[-4px] transition-all duration-200 cursor-pointer"
       >
         Human Future
       </button>
@@ -95,7 +83,7 @@ export const Menu: React.FC<MenuProps> = ({ shrink, setShrink, className }) => {
             setGalacticClicked(true);
           }
         }}
-        className=" hover:underline cursor-pointer"
+        className=" underline hover:decoration-[1.5px] hover:translate-y-[-4px] transition-all duration-200 cursor-pointer"
       >
         Galactic Urbanite
       </button>
@@ -108,7 +96,7 @@ export const Menu: React.FC<MenuProps> = ({ shrink, setShrink, className }) => {
             setMoreClicked(true);
           }
         }}
-        className=" hover:underline cursor-pointer"
+        className=" underline hover:decoration-[1.5px] hover:translate-y-[-4px] transition-all duration-200 cursor-pointer"
       >
         More
       </button>

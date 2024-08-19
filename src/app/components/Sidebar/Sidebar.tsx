@@ -35,6 +35,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ session, userDetails }) => {
               />
             )} */}
             <button
+            className="hover:translate-y-[-4px] transition-all duration-200"
               onClick={() => {
                 setShowSidebar(false);
               }}
@@ -79,7 +80,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ session, userDetails }) => {
                 setShowSidebar(false);
               }}
               href={"/cart"}
-              className="w-[200px] h-[50px] bg-white border-[1.5px] border-black rounded-full flex items-center justify-center"
+              className="w-[200px] h-[50px] bg-white border-[1.5px] border-black rounded-full flex items-center justify-center hover:translate-y-[-4px] transition-all duration-200"
             >
               View cart
             </Link>
@@ -88,7 +89,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ session, userDetails }) => {
                 setShowSidebar(false);
               }}
               href={"/signout"}
-              className="w-[200px] h-[50px] bg-black text-white border-[1.5px] border-black rounded-full flex items-center justify-center"
+              className="w-[200px] h-[50px] bg-black text-white border-[1.5px] border-black rounded-full flex items-center justify-center hover:translate-y-[-4px] transition-all duration-200"
             >
               Sign out
             </Link>
