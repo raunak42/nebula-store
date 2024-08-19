@@ -51,7 +51,9 @@ export const Notification: React.FC<NotificationProps> = ({
               setProduct(null);
             }}
           >
-            <Image alt="" width={24} height={24} src={"/cross.svg"} />
+            <Image alt=""  className="hidden md:block" width={24} height={24} src={"/cross.svg"} />
+            <Image alt=""  className="visible md:hidden" width={18} height={18} src={"/cross.svg"} />
+            
           </button>
         </div>
 
