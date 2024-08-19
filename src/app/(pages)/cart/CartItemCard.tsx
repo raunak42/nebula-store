@@ -1,202 +1,142 @@
 "use client";
-import {
-  ApiDataAttributes,
-  PrismaProductOutput,
-  PrismaUserOutput,
-} from "@/app/utils/types";
+import { PrismaProductOutput, PrismaUserOutput } from "@/app/utils/types";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { BASE_URL } from "@/app/utils/constants";
-import { RemoveBodyParams } from "@/app/api/removeFromCart/route";
-import { AddToCartParams } from "@/app/api/addToCart/route";
-import { RemoveOneBodyParams } from "@/app/api/removeOneFromCart/route";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import {
-  calculateCartItemsState,
-  recalculateGTState,
-  showGTSpinnerState,
-} from "@/store";
+import { calculateCartItemsState } from "@/store";
 import Link from "next/link";
+import { handleDelete, handleMinus, handlePlus } from "./helpers";
 
 interface CartItemCardProps {
   item: PrismaProductOutput;
   user: PrismaUserOutput;
+  setGetFreshData: Dispatch<SetStateAction<boolean>>;
 }
 
-export const CartItemCard: React.FC<CartItemCardProps> = ({ item, user }) => {
+export const CartItemCard: React.FC<CartItemCardProps> = ({
+  item,
+  user,
+  setGetFreshData,
+}) => {
   const [qty, setQty] = useState<number>(0);
   const [itemTotal, setItemTotal] = useState<number>(0);
-  const [hideCard, setHideCard] = useState<boolean>(false);
   const [showBinSpinner, setShowBinSpinner] = useState<boolean>(false);
-  const [showTotalSpinner, setShowTotalSpinner] = useState<boolean>(false);
-  const [disableButton, setDisableButton] = useState<boolean>(false);
-  const [userData, setUserData] = useState<PrismaUserOutput | null>(user);
-  const [showGTSpinner, setShowGTSpinner] = useRecoilState(showGTSpinnerState);
-  const [recalculateGT, setRecalculateGT] = useRecoilState(recalculateGTState);
+  const [showItemTotalSpinner, setShowItemTotalSpinner] =
+    useState<boolean>(false);
   const [calculateCartItems, setCalculateCartItems] = useRecoilState(
     calculateCartItemsState
   );
 
+  ///////////////////////////////////////////////////////////////
   useEffect(() => {
-    const totalUnique = getOccurence(userData!, item);
-    const itemTotal = item?.price! * qty;
-    setQty(totalUnique);
+    if (!item || !user) {
+      return;
+    }
+    const qty = getOccurence(user, item);
+    const itemTotal = item.price! * qty;
+    setQty(qty);
     setItemTotal(itemTotal);
-  }, [item, user, qty, userData]);
-
-  const handleDelete = async () => {
-    setShowGTSpinner(true);
-    setShowBinSpinner(true);
-    const body: RemoveBodyParams = {
-      productId: item.id!,
-      userId: user.id!,
-    };
-    const res = await fetch(`${BASE_URL}/api/removeFromCart`, {
-      method: "POST",
-      cache: "no-store",
-      body: JSON.stringify(body),
-    });
-    const data: ApiDataAttributes = await res.json();
-    console.log(data.message);
-    if (data.message === "Success") {
-      setRecalculateGT(true);
-      setCalculateCartItems(true);
-      setShowBinSpinner(false)
-    }
+  }, [item, user]);
+  ///////////////////////////////////////////////////////////////
+  
+  ///////////////////////////////////////////////////////////////
+  const refreshProps = {
+    item,
+    setCalculateCartItems,
+    setGetFreshData,
+    setItemTotal,
+    setQty,
+    setShowBinSpinner,
+    setShowItemTotalSpinner,
+    user,
   };
-
-  const addToCart = async () => {
-    const body: AddToCartParams = {
-      productId: item.id!,
-      userId: user.id!,
-      quantity: 1,
-    };
-
-    const res = await fetch(`${BASE_URL}/api/addToCart`, {
-      method: "POST",
-      cache: "no-store",
-      body: JSON.stringify(body),
-    });
-    const data: ApiDataAttributes = await res.json();
-    if (data.message === "Success" && data.user) {
-      setUserData(data.user);
-      const totalUnique = getOccurence(userData!, item);
-      setQty(totalUnique);
-      setItemTotal(item.price! * qty);
-      setShowTotalSpinner(false);
-      setDisableButton(false);
-      setRecalculateGT(true);
-      setCalculateCartItems(true);
-    }
-  };
-
-  const subFromCart = async () => {
-    const body: RemoveOneBodyParams = {
-      productId: item.id!,
-      userId: user.id!,
-    };
-    const response = await fetch(`${BASE_URL}/api/removeOneFromCart`, {
-      method: "POST",
-      cache: "no-store",
-      body: JSON.stringify(body),
-    });
-    const data: ApiDataAttributes = await response.json();
-    if (data.message === "Success" && data.user) {
-      setUserData(data.user);
-      const totalUnique = getOccurence(userData!, item);
-      setQty(totalUnique);
-      setItemTotal(item.price! * qty);
-      setShowTotalSpinner(false);
-      setDisableButton(false);
-      setRecalculateGT(true);
-      setCalculateCartItems(true);
-    }
-  };
+  ///////////////////////////////////////////////////////////////
 
   return (
-    !hideCard && (
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
-        className="flex  flex-col gap-[24px] items-start lg:flex-row w-full lg:items-center justify-between m-[32px]"
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      className="flex  flex-col gap-[24px] items-start lg:flex-row w-full lg:items-center justify-between m-[32px]"
+    >
+      <Link
+        href={`product/${item.id}`}
+        className="cursor-pointer flex items-start justify-start gap-[48px] "
       >
-        <Link
-          href={`product/${item.id}`}
-          className="cursor-pointer flex items-start justify-start gap-[48px] "
-        >
-          <Image alt="" width={100} height={100} src={item.imageLink!} />
-          <div className="flex flex-col items-start justify-start gap-[4px] group">
-            <h1 className="text-lg group-hover:underline ">{item.name}</h1>
-            <h1 className="text-sm">₹ {item.price}.00</h1>
-            <h1 className="text-sm ">Theme: {item.theme}</h1>
-          </div>
-        </Link>
+        <Image alt="" width={100} height={100} src={item.imageLink!} />
+        <div className="flex flex-col items-start justify-start gap-[4px] group">
+          <h1 className="text-lg group-hover:underline ">{item.name}</h1>
+          <h1 className="text-sm">₹ {item.price}.00</h1>
+          <h1 className="text-sm ">Theme: {item.theme}</h1>
+        </div>
+      </Link>
 
-        <div className="flex flex-row items-center justify-between  w-full lg:w-[40%]">
-          <div className="flex items-center gap-[12px]">
-            <div className="h-[40px] shadow w-[120px] bg-white text-black rounded-none border flex items-center justify-center gap-[18px]">
-              <button
-                className="disabled:cursor-not-allowed disabled:opacity-50"
-                disabled={(disableButton || qty === 1) && true}
-                onClick={() => {
-                  setShowGTSpinner(true);
-                  setShowTotalSpinner(true);
-                  setDisableButton(true);
-                  subFromCart();
-                }}
-              >
-                <Image alt="" width={18} height={18} src={"/minus.svg"} />
-              </button>
-              <h1 className="w-[20%] flex items-center justify-center">
-                {qty}
-              </h1>
-              <button
-                className="disabled:cursor-not-allowed"
-                disabled={disableButton && true}
-                onClick={() => {
-                  setShowGTSpinner(true);
-                  setShowTotalSpinner(true);
-                  setDisableButton(true);
-                  addToCart();
-                }}
-              >
-                <Image alt="" width={18} height={18} src={"/plus.svg"} />
-              </button>
-            </div>
+      <div className="flex flex-row items-center justify-between  w-full lg:w-[40%]">
+        <div className="flex items-center gap-[12px]">
+          <div className="h-[40px] shadow w-[120px] bg-white text-black rounded-none border flex items-center justify-center gap-[18px]">
             <button
-              onClick={handleDelete}
-              className="flex items-center justify-center"
+              className="disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={(showItemTotalSpinner || qty === 1) && true}
+              onClick={() => {
+                handleMinus(refreshProps);
+              }}
             >
-              {showBinSpinner ? (
-                <Image
-                  alt=""
-                  className="animate-spin"
-                  width={18}
-                  height={18}
-                  src={"/spinner.svg"}
-                />
-              ) : (
-                <Image alt="" width={18} height={18} src={"/bin.svg"} />
-              )}
+              <Image alt="" width={18} height={18} src={"/minus.svg"} />
+            </button>
+            <h1 className="w-[20%] flex items-center justify-center">{qty}</h1>
+            <button
+              className="disabled:cursor-not-allowed"
+              disabled={showItemTotalSpinner && true}
+              onClick={() => {
+                handlePlus(refreshProps);
+              }}
+            >
+              <Image alt="" width={18} height={18} src={"/plus.svg"} />
             </button>
           </div>
-          {!showTotalSpinner ? (
-            <h1 className="text-xl">₹ {itemTotal}.00</h1>
-          ) : (
-            <Image
-              alt=""
-              className="animate-spin"
-              width={32}
-              height={32}
-              src={"/spinner.svg"}
-            />
-          )}
+          <button
+            onClick={() => {
+              handleDelete({
+                item,
+                setQty,
+                setShowBinSpinner,
+                user,
+                setCalculateCartItems,
+                setGetFreshData,
+                setItemTotal,
+                setShowItemTotalSpinner,
+              });
+            }}
+            className="flex items-center justify-center"
+          >
+            {showBinSpinner ? (
+              <Image
+                alt=""
+                className="animate-spin"
+                width={18}
+                height={18}
+                src={"/spinner.svg"}
+              />
+            ) : (
+              <Image alt="" width={18} height={18} src={"/bin.svg"} />
+            )}
+          </button>
         </div>
-      </motion.div>
-    )
+        {!showItemTotalSpinner ? (
+          <h1 className="text-xl">₹ {itemTotal}.00</h1>
+        ) : (
+          <Image
+            alt=""
+            className="animate-spin"
+            width={32}
+            height={32}
+            src={"/spinner.svg"}
+          />
+        )}
+      </div>
+    </motion.div>
   );
 };
 

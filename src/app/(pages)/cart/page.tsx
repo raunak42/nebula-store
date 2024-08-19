@@ -6,12 +6,8 @@ import {
   PrismaProductOutput,
   PrismaUserOutput,
 } from "@/app/utils/types";
-import {
-  recalculateGTState,
-  showGTSpinnerState,
-  userDetailsState,
-} from "@/store";
-import { useEffect, useState } from "react";
+import { userDetailsState } from "@/store";
+import { useCallback, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { CartItemCard, getOccurence } from "./CartItemCard";
 import Image from "next/image";
@@ -19,81 +15,77 @@ import Link from "next/link";
 
 export default function Page() {
   const [grandTotal, setGrandTotal] = useState<number>(0);
-  const [showGTSpinner, setShowGTSpinner] = useRecoilState(showGTSpinnerState);
-  const [recalculateGT, setRecalculateGT] = useRecoilState(recalculateGTState);
+  const [uniqueProducts, setUniqueProducts] = useState<
+    PrismaProductOutput[] | null
+  >();
+  const [showGTSpinner, setShowGTSpinner] = useState<boolean>(false);
+  const [getFreshData, setGetFreshData] = useState<boolean>(false);
   const [user, setUser] = useRecoilState(userDetailsState);
   const [isClient, setIsCLient] = useState(false);
   const [allProducts, setAllProducts] = useState<
     PrismaProductOutput[] | null
   >();
 
+  //////////////////////////////////////
   useEffect(() => {
     setIsCLient(true);
-  }, []);
-
-  useEffect(() => {
     const fetchData = async () => {
+      if (!isClient || !user) {
+        return;
+      }
       const res = await fetch(`${BASE_URL}/api/getAllProducts`, {
         method: "GET",
         cache: "no-store",
       });
       const data: ApiDataAttributes = await res.json();
-      const products = data.products!;
-      setAllProducts(products);
-    };
-    fetchData();
-  }, []);
+      if (data.message === "Success") {
+        const allProducts = data.products!;
+        const uniqueProducts = getUniqueProducts(allProducts, user);
+        const total = getTotal(allProducts, user);
 
-  useEffect(() => {
-    if (!isClient || !user || !allProducts) {
-      return;
-    }
-
-    const uniqueProductIds = getUniqueProductIds(user);
-    const uniqueProducts = getUniqueProducts(allProducts, uniqueProductIds);
-    const total = getTotal(allProducts, uniqueProductIds, user);
-    setGrandTotal(total);
-  }, [allProducts, isClient, user]);
-
-  useEffect(() => {
-    if (!isClient || !user || !allProducts) {
-      return;
-    }
-
-    const getUserDetails = async () => {
-      const res = await fetch(`${BASE_URL}/api/getUserDetails`, {
-        method: "POST",
-        cache: "no-store",
-        body: JSON.stringify({ userId: user.id }),
-      });
-      const data: ApiDataAttributes = await res.json();
-      if (data.user) {
-        const uniqueProductIds = getUniqueProductIds(data.user);
-        const uniqueProducts = getUniqueProducts(allProducts, uniqueProductIds);
-        const total = getTotal(allProducts, uniqueProductIds, data.user);
+        setUniqueProducts(uniqueProducts);
         setGrandTotal(total);
-        setShowGTSpinner(false);
+        setAllProducts(allProducts); //This is required by the getFreshUserDetails function.
       }
     };
-    if (recalculateGT) {
-      getUserDetails();
-      setRecalculateGT(false);
-    }
-  }, [
-    allProducts,
-    isClient,
-    recalculateGT,
-    user,
-    setShowGTSpinner,
-    setRecalculateGT,
-  ]);
+    fetchData();
+  }, [isClient, user, grandTotal]);
+  //////////////////////////////////////
 
-  if (!isClient || !user || !allProducts) {
+  /////////////////////////////////////////////////////////////////////
+  const getFreshUserDetails = useCallback(async () => {
+    if (!user || !allProducts) {
+      return;
+    }
+    const res = await fetch(`${BASE_URL}/api/getUserDetails`, {
+      method: "POST",
+      cache: "no-store",
+      body: JSON.stringify({ userId: user.id }),
+    });
+    const data: ApiDataAttributes = await res.json();
+    if (data.user) {
+      const freshUniqueProducts = getUniqueProducts(allProducts, data.user);
+      const freshTotal = getTotal(allProducts, data.user);
+      setUniqueProducts(freshUniqueProducts);
+      setGrandTotal(freshTotal);
+      setGetFreshData(false);
+      setShowGTSpinner(false);
+    }
+  }, [allProducts, user]);
+
+  useEffect(() => {
+    //This useEffect listens for changes in getFreshData;
+    if (getFreshData) {
+      setShowGTSpinner(true);
+      getFreshUserDetails();
+    }
+  }, [getFreshData, getFreshUserDetails]);
+
+  ///////////////////////////////////////////////////////////////////////////
+
+  if (!uniqueProducts || !grandTotal) {
     return <Loading />;
   }
-
-  const uniqueProductIds = getUniqueProductIds(user);
-  const uniqueProducts = getUniqueProducts(allProducts, uniqueProductIds);
 
   return (
     <div className="w-full h-full px-[32px] lg:px-[128px] py-[24px] lg:py-[64px] flex items-start justify-center mt-[80px]">
@@ -116,7 +108,14 @@ export default function Page() {
           <div className="w-full flex flex-row items-center justify-center">
             <div className="flex flex-col w-full h-full border-t border-b lg:p-[24px] items-center ">
               {uniqueProducts.map((item, index) => {
-                return <CartItemCard user={user} item={item} key={index} />;
+                return (
+                  <CartItemCard
+                    user={user!}
+                    item={item}
+                    setGetFreshData={setGetFreshData}
+                    key={index}
+                  />
+                );
               })}
             </div>
           </div>
@@ -136,7 +135,6 @@ export default function Page() {
               </div>
             ) : (
               <h1 className="text-base lg:text-2xl font-semibold">
-                {" "}
                 ₹ {grandTotal}.00
               </h1>
             )}
@@ -150,20 +148,11 @@ export default function Page() {
   );
 }
 
-const getUniqueProductIds = (user: PrismaUserOutput) => {
-  let uniqueProductIds: number[] = [];
-  user.cart?.forEach((product) => {
-    if (!uniqueProductIds.includes(product)) {
-      uniqueProductIds.push(product);
-    }
-  });
-  return uniqueProductIds;
-};
-
 const getUniqueProducts = (
   allProducts: PrismaProductOutput[],
-  uniqueProductIds: number[]
+  user: PrismaUserOutput
 ) => {
+  const uniqueProductIds = getUniqueProductIds(user);
   let uniqueProducts: PrismaProductOutput[] = [];
   allProducts.map((product, index) => {
     uniqueProductIds.map((uniqueId) => {
@@ -175,13 +164,22 @@ const getUniqueProducts = (
   return uniqueProducts;
 };
 
+const getUniqueProductIds = (user: PrismaUserOutput) => {
+  let uniqueProductIds: number[] = [];
+  user.cart?.forEach((product) => {
+    if (!uniqueProductIds.includes(product)) {
+      uniqueProductIds.push(product);
+    }
+  });
+  return uniqueProductIds;
+};
+
 const getTotal = (
   allProducts: PrismaProductOutput[],
-  uniqueProductIds: number[],
   user: PrismaUserOutput
 ) => {
   let total = 0;
-  const unique = getUniqueProducts(allProducts, uniqueProductIds);
+  const unique = getUniqueProducts(allProducts, user);
   unique.map((item) => {
     const occurence = getOccurence(user, item);
     total = total + occurence * item.price!;
