@@ -51,7 +51,7 @@ export const recalculateGTState = atom<boolean>({
     default: false
 })
 
-export const calculateCartItemsState = atom<boolean>({
+export const getFreshCartBadgeState = atom<boolean>({
     key: "calculateCartItemsState",
     default: false
 })

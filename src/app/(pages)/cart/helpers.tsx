@@ -19,7 +19,7 @@ interface CartFunctionsParams {
   setItemTotal: Dispatch<SetStateAction<number>>;
   setShowItemTotalSpinner: Dispatch<SetStateAction<boolean>>;
   setGetFreshData: Dispatch<SetStateAction<boolean>>;
-  setCalculateCartItems: SetterOrUpdater<boolean>;
+  setGetFreshCartBadge: SetterOrUpdater<boolean>;
 }
 
 interface FlowParams extends CartFunctionsParams {
@@ -33,7 +33,7 @@ export const handleDelete = async ({
   setQty,
   setItemTotal,
   setShowItemTotalSpinner,
-  setCalculateCartItems,
+  setGetFreshCartBadge,
   setGetFreshData,
 }: CartFunctionsParams) => {
   setShowBinSpinner(true);
@@ -56,7 +56,7 @@ export const handleDelete = async ({
       setShowBinSpinner,
       setShowItemTotalSpinner,
       user,
-      setCalculateCartItems,
+      setGetFreshCartBadge,
       setGetFreshData,
       freshUserData: null,
     });
@@ -70,7 +70,7 @@ export const handlePlus = async ({
   setQty,
   setItemTotal,
   setShowItemTotalSpinner,
-  setCalculateCartItems,
+  setGetFreshCartBadge,
   setGetFreshData,
 }: CartFunctionsParams) => {
   setShowItemTotalSpinner(true);
@@ -89,7 +89,7 @@ export const handlePlus = async ({
   if (data.message === "Success" && data.user) {
     refreshFlow({
       item,
-      setCalculateCartItems,
+      setGetFreshCartBadge,
       setGetFreshData,
       setItemTotal,
       setQty,
@@ -108,7 +108,7 @@ export const handleMinus = async ({
   setQty,
   setItemTotal,
   setShowItemTotalSpinner,
-  setCalculateCartItems,
+  setGetFreshCartBadge,
   setGetFreshData,
 }: CartFunctionsParams) => {
   setShowItemTotalSpinner(true);
@@ -126,7 +126,7 @@ export const handleMinus = async ({
     const qty = getOccurence(data.user, item);
     refreshFlow({
       item,
-      setCalculateCartItems,
+      setGetFreshCartBadge,
       setGetFreshData,
       setItemTotal,
       setQty,
@@ -145,7 +145,7 @@ export const refreshFlow = ({
   setItemTotal,
   setShowBinSpinner,
   setShowItemTotalSpinner,
-  setCalculateCartItems,
+  setGetFreshCartBadge,
   user,
   setGetFreshData,
 }: FlowParams) => {
@@ -159,5 +159,5 @@ export const refreshFlow = ({
     setShowBinSpinner(false);
   }
   setGetFreshData(true);
-  setCalculateCartItems(true);
+  setGetFreshCartBadge(true);
 };

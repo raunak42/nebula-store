@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
-  calculateCartItemsState,
+  getFreshCartBadgeState,
   productDetailsState,
   productQtyState,
   showNotificationState,
@@ -32,8 +32,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
   const [quantity, setQuantity] = useRecoilState<number>(productQtyState);
   const [disableButton, setDisableButton] = useState<boolean>(false);
-  const [calculateCartItems, setCalculateCartItems] = useRecoilState(
-    calculateCartItemsState
+  const [getFreshCartBadge, setGetFreshCartBadge] = useRecoilState(
+    getFreshCartBadgeState
   );
 
   const xl = useMediaQuery({ minWidth: 1284 }); //xl breakpoint
@@ -59,7 +59,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       setShowNotification(true);
       setShowSpinner(false);
       setDisableButton(false);
-      setCalculateCartItems(true)
+      setGetFreshCartBadge(true)
     }
   };
 

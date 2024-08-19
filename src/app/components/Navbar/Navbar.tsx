@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
-  calculateCartItemsState,
+  getFreshCartBadgeState,
   showNotificationState,
   showSideBarState,
   userDetailsState,
@@ -25,8 +25,8 @@ export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
   const [showSidebar, setShowSidebar] = useRecoilState(showSideBarState);
   const [user, setUser] = useRecoilState(userDetailsState);
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
-  const [calculateCartItems, setCalculateCartItems] = useRecoilState(
-    calculateCartItemsState
+  const [getFreshCartBadge, setGetFreshCartBadge] = useRecoilState(
+    getFreshCartBadgeState
   );
   const [showCartSpinner, setShowCartSpinner] = useState<boolean>(false);
 
@@ -56,11 +56,11 @@ export const Navbar: React.FC<NavbarProps> = ({ userDetails, session }) => {
         setShowCartSpinner(false);
       }
     };
-    if (calculateCartItems) {
+    if (getFreshCartBadge) {
       getUserDetails();
-      setCalculateCartItems(false);
+      setGetFreshCartBadge(false);
     }
-  }, [user, setUser, calculateCartItems, setCalculateCartItems]);
+  }, [user, setUser, getFreshCartBadge, setGetFreshCartBadge]);
 
   return (
     <div

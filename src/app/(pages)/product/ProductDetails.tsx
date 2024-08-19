@@ -3,7 +3,7 @@ import { AddToCartParams } from "@/app/api/addToCart/route";
 import { BASE_URL } from "@/app/utils/constants";
 import { ApiDataAttributes, PrismaProductOutput } from "@/app/utils/types";
 import {
-  calculateCartItemsState,
+  getFreshCartBadgeState,
   productDetailsState,
   productQtyState,
   showNotificationState,
@@ -26,8 +26,8 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({
   const [quantity, setQuantity] = useRecoilState<number>(productQtyState);
   const setShowNotification = useSetRecoilState(showNotificationState);
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
-  const [calculateCartItems, setCalculateCartItems] = useRecoilState(
-    calculateCartItemsState
+  const [getFreshCartBadge, setGetFreshCartBadge] = useRecoilState(
+    getFreshCartBadgeState
   );
 
   const addToCart = async () => {
@@ -46,7 +46,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({
     if (data.message === "Success") {
       setShowNotification(true);
       setShowSpinner(false);
-      setCalculateCartItems(true);
+      setGetFreshCartBadge(true);
     }
   };
 

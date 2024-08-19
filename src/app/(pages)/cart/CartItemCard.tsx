@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { calculateCartItemsState } from "@/store";
+import { getFreshCartBadgeState } from "@/store";
 import Link from "next/link";
 import { handleDelete, handleMinus, handlePlus } from "./helpers";
 
@@ -24,8 +24,8 @@ export const CartItemCard: React.FC<CartItemCardProps> = ({
   const [showBinSpinner, setShowBinSpinner] = useState<boolean>(false);
   const [showItemTotalSpinner, setShowItemTotalSpinner] =
     useState<boolean>(false);
-  const [calculateCartItems, setCalculateCartItems] = useRecoilState(
-    calculateCartItemsState
+  const [getFreshCartBadge, setGetFreshCartBadge] = useRecoilState(
+    getFreshCartBadgeState
   );
 
   ///////////////////////////////////////////////////////////////
@@ -39,11 +39,11 @@ export const CartItemCard: React.FC<CartItemCardProps> = ({
     setItemTotal(itemTotal);
   }, [item, user]);
   ///////////////////////////////////////////////////////////////
-  
+
   ///////////////////////////////////////////////////////////////
   const refreshProps = {
     item,
-    setCalculateCartItems,
+    setGetFreshCartBadge,
     setGetFreshData,
     setItemTotal,
     setQty,
@@ -103,7 +103,7 @@ export const CartItemCard: React.FC<CartItemCardProps> = ({
                 setQty,
                 setShowBinSpinner,
                 user,
-                setCalculateCartItems,
+                setGetFreshCartBadge,
                 setGetFreshData,
                 setItemTotal,
                 setShowItemTotalSpinner,
