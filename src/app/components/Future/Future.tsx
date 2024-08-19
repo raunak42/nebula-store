@@ -1,6 +1,5 @@
 "use client";
 import { PrismaProductOutput } from "@/app/utils/types";
-import { ProductCard } from "../ProductCard.tsx/ProductCard";
 import { useRecoilState } from "recoil";
 import { futureClickedState } from "@/store";
 import { useEffect, useRef, useState } from "react";
@@ -23,7 +22,7 @@ export const Future: React.FC<FutureProps> = ({ items, session }) => {
 
     if (scrollTo === "future" || futureClicked) {
       futureElement?.scrollIntoView({
-        behavior: "smooth",
+        behavior: futureClicked ? "smooth" : "instant",
         block: "start",
       });
     }

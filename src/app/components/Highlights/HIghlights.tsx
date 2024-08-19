@@ -1,6 +1,5 @@
 "use client";
 import { PrismaProductOutput } from "@/app/utils/types";
-import { ProductCard } from "../ProductCard.tsx/ProductCard";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { moreClickedState } from "@/store";
@@ -23,7 +22,7 @@ export const Highlights: React.FC<HighlightsProps> = ({ items, session }) => {
 
     if (scrollTo === "more" || moreClicked) {
       moreElement?.scrollIntoView({
-        behavior: "smooth",
+        behavior: moreClicked ? "smooth" : "instant",
         block: "start",
       });
     }

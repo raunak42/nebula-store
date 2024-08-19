@@ -1,11 +1,10 @@
 "use client";
 import { PrismaProductOutput } from "@/app/utils/types";
-import { ProductCard } from "../ProductCard.tsx/ProductCard";
 import { TextAnimator } from "@/app/animators/TextAnimator/TextAnimator";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { quantumClickedState } from "@/store";
-import { Session, User } from "lucia";
+import { Session } from "lucia";
 import { RowTypeA } from "../RowTypes/RowTypeA";
 
 interface QuantumProps {
@@ -25,7 +24,7 @@ export const Quantum: React.FC<QuantumProps> = ({ items, session }) => {
 
     if (scrollTo === "quantum" || quantumClicked) {
       quantumElement?.scrollIntoView({
-        behavior: "smooth",
+        behavior: quantumClicked ? "smooth" : "instant",
         block: "start",
       });
     }

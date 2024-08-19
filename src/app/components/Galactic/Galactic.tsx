@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { ProductCard } from "../ProductCard.tsx/ProductCard";
 import { PrismaProductOutput } from "@/app/utils/types";
 import { TextAnimator } from "@/app/animators/TextAnimator/TextAnimator";
 import { motion } from "framer-motion";
@@ -27,7 +26,7 @@ export const Galactic: React.FC<GalacticProps> = ({ items, session }) => {
 
     if (scrollTo === "galactic" || galacticClicked) {
       galacticElement?.scrollIntoView({
-        behavior: "smooth",
+        behavior: galacticClicked ? "smooth" : "instant",
         block: "start",
       });
     }
