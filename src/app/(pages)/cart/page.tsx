@@ -83,6 +83,14 @@ export default function Page() {
 
   ///////////////////////////////////////////////////////////////////////////
 
+  const handleClick = async()=>{
+        await fetch(`${BASE_URL}/api/checkoutSession`,{
+          method:"POST",
+          cache:"no-store",
+          
+        })
+  }
+
   if (!uniqueProducts) {
     return <Loading />;
   }
@@ -145,7 +153,7 @@ export default function Page() {
               </h1>
             )}
           </div>
-          <button className="cursor-not-allowed lg:w-[300px] lg:h-[50px] w-[160px] h-[40px] bg-black rounded-full text-white text-xl">
+          <button onClick={handleClick} className="cursor-not-allowed lg:w-[300px] lg:h-[50px] w-[160px] h-[40px] bg-black rounded-full text-white text-xl">
             <h1 className="text-sm lg:text-lg">Check out</h1>
           </button>
         </div>

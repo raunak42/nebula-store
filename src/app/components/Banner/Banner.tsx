@@ -2,7 +2,7 @@
 import { TextAnimator } from "@/app/animators/TextAnimator/TextAnimator";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import banner47 from "@/../public/banner47.png"
+import banner47 from "@/../public/banner47.png";
 
 export const Banner: React.FC = () => {
   return (
@@ -21,7 +21,9 @@ export const Banner: React.FC = () => {
           />
         </div>
       </div>
-      <Image className="" placeholder="blur" height={100} width={1600} alt="img" src={banner47} />
+      <div className="w-full">
+        <Image alt="img" src={banner47} />
+      </div>
     </motion.div>
   );
 };
