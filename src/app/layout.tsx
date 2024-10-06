@@ -13,7 +13,7 @@ import { ApiDataAttributes } from "./utils/types";
 import { ModalBG } from "./components/ModalBg/ModalBg";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 
-const montserrat = Montserrat({ subsets: ["latin"]});
+const montserrat = Montserrat({ subsets: ["latin"], display:"swap"});
 
 export const metadata: Metadata = {
   title: "Nebula Store",
@@ -45,12 +45,12 @@ export default async function RootLayout({
     <html lang="en">
       <ReactQueryWrapper>
         <RecoilWrapper>
-          <body className={`${montserrat.className}  dark:text-white`}>
+          <body className={`${montserrat.className}  dark:text-white overflow-x-clip`}>
             <Navbar userDetails={userDetails!} session={session} />
             <ModalBG />
             <Sidebar session={session} userDetails={userDetails!} />
             <Notification session={session} user={user} />
-            <div className="dark:bg-[#000000]"> {children}</div>
+            <main className="dark:bg-[#000000] w-screen overflow-x-clip"> {children}</main>
             <Footer />
           </body>
         </RecoilWrapper>
