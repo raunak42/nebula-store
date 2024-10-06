@@ -17,8 +17,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ session, userDetails }) => {
   const [showSidebar, setShowSidebar] = useRecoilState(showSideBarState);
   return (
     <div
-      className={`z-50 overflow-hidden transition-all duration-300 ease-in-out fixed left-0 h-full border-r bg-white ${
-        showSidebar ? "w-[300px]" : "w-0"
+      className={`z-50 overflow-clip transition-all duration-300 ease-in-out fixed left-0 h-full border-r bg-white ${
+        showSidebar ? "w-[300px]" : "w-0 border-none"
       }`}
     >
       <div className="w-[300px] h-full  flex flex-col items-start justify-start p-[24px] gap-[32px]">
