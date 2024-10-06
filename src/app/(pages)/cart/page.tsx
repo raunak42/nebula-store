@@ -12,6 +12,7 @@ import { useRecoilState } from "recoil";
 import { CartItemCard, getOccurence } from "./CartItemCard";
 import Image from "next/image";
 import Link from "next/link";
+import { CheckoutButton } from "./CheckoutButton";
 
 export default function Page() {
   const [grandTotal, setGrandTotal] = useState<number>(0);
@@ -87,7 +88,7 @@ export default function Page() {
   //       await fetch(`${BASE_URL}/api/checkoutSession`,{
   //         method:"POST",
   //         cache:"no-store",
-          
+
   //       })
   // }
 
@@ -153,9 +154,7 @@ export default function Page() {
               </h1>
             )}
           </div>
-          <button  className="cursor-not-allowed lg:w-[300px] lg:h-[50px] w-[160px] h-[40px] bg-black rounded-full text-white text-xl">
-            <h1 className="text-sm lg:text-lg">Check out</h1>
-          </button>
+          <CheckoutButton products={uniqueProducts} userDetails={user!} />
         </div>
       </div>
     </div>
