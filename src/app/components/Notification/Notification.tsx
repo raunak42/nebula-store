@@ -33,7 +33,9 @@ export const Notification: React.FC<NotificationProps> = ({
             ? "gap-[32px] w-[340px] p-[24px] h-[360px]"
             : "gap-[8px] md:gap-[16px] w-[280px] h-[120px] md:w-[340px] py-[8px] px-[24px] md:h-[180px]"
         } transition-all duration-300 ease-in-out ${
-          showNotification ? "opacity-100 translate-y-[460px] shadow-2xl " : " opacity-100"
+          showNotification
+            ? "opacity-100 translate-y-[460px] shadow-2xl "
+            : "opacity-0"
         }  `}
       >
         <div
@@ -48,7 +50,7 @@ export const Notification: React.FC<NotificationProps> = ({
             </div>
           )}
           <button
-          className="hover:translate-y-[-4px] transition-all duration-200"
+            className="hover:translate-y-[-4px] transition-all duration-200"
             onClick={() => {
               setShowNotification(false);
               setProduct(null);
@@ -90,17 +92,20 @@ export const Notification: React.FC<NotificationProps> = ({
             </div>
 
             <div className="  flex flex-col items-center justify-start gap-[12px]">
-              <button
-                onClick={() => {
-                  window.location.assign("/cart");
-                }}
-                className="w-[300px] h-[50px] bg-white border-[1.5px] border-black rounded-full hover:translate-y-[-4px] transition-all duration-200"
+              <Link
+                onClick={() => setShowNotification(false)}
+                href={"/cart"}
+                className=" flex items-center justify-center w-[300px] h-[50px] bg-white border-[1.5px] border-black rounded-full hover:translate-y-[-4px] transition-all duration-200"
               >
                 View cart
-              </button>
-              <button className="cursor-not-allowed w-[300px] h-[50px] bg-black rounded-full text-white hover:translate-y-[-4px] transition-all duration-200">
+              </Link>
+              <Link
+                onClick={() => setShowNotification(false)}
+                href={"/cart"}
+                className=" flex items-center justify-center w-[300px] h-[50px] bg-black rounded-full text-white hover:translate-y-[-4px] transition-all duration-200"
+              >
                 Check out
-              </button>
+              </Link>
               <h1
                 onClick={() => setShowNotification(false)}
                 className="underline decoration-dashed cursor-pointer"
