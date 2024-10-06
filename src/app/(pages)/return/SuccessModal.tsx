@@ -14,7 +14,7 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({ user }) => {
 
   return (
     <div className="w-full h-screen overflow-clip flex items-center justify-center">
-      <div className="w-[360px] md:h-[400px] md:w-[600px] shadow-lg border-[1px] border-gray-200 flex flex-col items-center justify-start p-6 gap-8">
+      <div className="w-[300px] md:h-[400px] md:w-[600px] shadow-lg border-[1px] border-gray-200 flex flex-col items-center justify-start p-6 gap-8">
         <div className="flex flex-col items-center">
           {orderSuccess === "true" ? (
             <CircleCheckBig size={100} strokeWidth={0.6} />

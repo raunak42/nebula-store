@@ -55,8 +55,6 @@ export async function POST(req: NextRequest) {
             }
         })
 
-        console.log(session.url)
-
         return Response.json(session.url as string)
     } catch (err) {
         console.error(err)

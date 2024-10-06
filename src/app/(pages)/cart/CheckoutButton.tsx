@@ -31,9 +31,6 @@ export const CheckoutButton: React.FC<CheckoutButtonParams> = ({
     const response = await fetch(`${BASE_URL}/api/checkoutSession`, {
       method: "POST",
       body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
       cache: "no-store",
     });
 
