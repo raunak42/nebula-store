@@ -22,7 +22,7 @@ export const Banner: React.FC = () => {
         </div>
       </div>
       <div className="w-full">
-        <Image alt="img" src={banner47} />
+        <Image alt="img" src={banner47} placeholder="blur" blurDataURL="https://github.com/user-attachments/assets/2f451400-2b3e-4ef1-a197-ba61e1fdf6df" />
       </div>
     </motion.div>
   );
