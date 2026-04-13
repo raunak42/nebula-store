@@ -1,6 +1,5 @@
 "use client";
 import { PrismaProductOutput } from "@/app/utils/types";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { TextAnimator } from "@/app/animators/TextAnimator/TextAnimator";
 import Link from "next/link";
@@ -41,19 +40,15 @@ export const FeaturedProduct: React.FC<FeatProps> = ({ item }) => {
         viewport={{ once: true, amount: 0.1 }}
       >
         {isLg ? (
-          <Image
-            className="rounded-md"
+          <img
+            className="rounded-md max-w-[600px] w-full h-auto"
             alt="img"
-            width={600}
-            height={600}
             src={item?.imageLink!}
           />
         ) : (
-          <Image
-            className="rounded-md"
+          <img
+            className="rounded-md max-w-[300px] w-full h-auto"
             alt="img"
-            width={300}
-            height={300}
             src={item?.imageLink!}
           />
         )}

@@ -65,7 +65,7 @@ export const CartItemCard: React.FC<CartItemCardProps> = ({
         href={`product/${item.id}`}
         className="cursor-pointer flex items-start justify-start gap-[48px] "
       >
-        <Image alt="" width={100} height={100} src={item.imageLink!} />
+        <img alt="" className="w-[100px] h-[100px] object-contain" src={item.imageLink!} />
         <div className="flex flex-col items-start justify-start gap-[4px] group">
           <h1 className="text-lg group-hover:underline ">{item.name}</h1>
           <h1 className="text-sm">₹ {item.price}.00</h1>

@@ -81,11 +81,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           className="flex flex-col sm:w-[270px] sm:h-[320px] w-[162px] h-[192px] items-center group cursor-pointer justify-center   "
         >
           <div className="dark:bg-white overflow-hidden size-[96%] group-hover:size-full group-hover:shadow-2xl rounded-lg ease-in-out  transition-all duration-300 flex items-center justify-center">
-            <Image
+            <img
               className="w-[70%] rounded-lg"
               alt="img"
-              width={100}
-              height={100}
               src={product.imageLink!}
             />
           </div>

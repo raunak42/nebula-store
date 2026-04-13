@@ -1,7 +1,6 @@
 import { BASE_URL } from "@/app/utils/constants";
 import { ApiDataAttributes } from "@/app/utils/types";
 import axios from "axios";
-import Image from "next/image";
 import { ProductDetails } from "../ProductDetails";
 import { Recommendations } from "../Recommendations";
 import { validateRequest } from "@/auth";
@@ -35,10 +34,8 @@ export default async function Page({ params }: PageParams) {
     <div className="flex flex-col items-center justify-start">
       <div className="w-full mt-[80px] md:h-[100vh]  overflow-hidden  flex flex-col items-center gap-[10px]  md:flex-row md:items-center md:justify-center md:p-0 p-[24px]">
         <div className="md:w-[60%] md:mt-[200px] h-full flex items-start justify-center ">
-          <Image
-            className="rounded-sm"
-            width={400}
-            height={300}
+          <img
+            className="rounded-sm max-w-[400px] w-full h-auto"
             alt=""
             src={product?.imageLink!}
           />

@@ -77,10 +77,9 @@ export const Notification: React.FC<NotificationProps> = ({
           <>
             <div className=" h-[200px] w-full flex items-start justify-start gap-[24px]">
               {product && (
-                <Image
+                <img
                   alt=""
-                  width={60}
-                  height={60}
+                  className="w-[60px] h-[60px] object-contain"
                   src={product?.imageLink!}
                 />
               )}
