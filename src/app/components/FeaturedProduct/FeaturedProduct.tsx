@@ -38,20 +38,15 @@ export const FeaturedProduct: React.FC<FeatProps> = ({ item }) => {
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true, amount: 0.1 }}
+        className="w-full max-w-[300px] lg:max-w-[600px] shrink-0"
       >
-        {isLg ? (
+        <div className="w-full aspect-square rounded-md overflow-hidden flex items-center justify-center">
           <img
-            className="rounded-md max-w-[600px] w-full h-auto"
+            className="w-full h-full object-contain rounded-md"
             alt="img"
             src={item?.imageLink!}
           />
-        ) : (
-          <img
-            className="rounded-md max-w-[300px] w-full h-auto"
-            alt="img"
-            src={item?.imageLink!}
-          />
-        )}
+        </div>
       </motion.div>
 
       <div className="flex flex-col  w-[70%] sm:w-[30%] ">
