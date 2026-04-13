@@ -16,6 +16,10 @@ export const FeaturedProduct: React.FC<FeatProps> = ({ item }) => {
   // const md = useMediaQuery({ minWidth: 768 }); //md breakpoint
   const sm = useMediaQuery({ minWidth: 640 }); //sm breakpoint
   const [isLg, setIsLg] = useState<boolean>(false);
+  const imageSrc =
+    item?.name === "Martian Terraform Keyboard"
+      ? "/martian-terraform-keyboard.jpg"
+      : item?.imageLink!;
 
   useEffect(() => {
     if (window) {
@@ -38,15 +42,13 @@ export const FeaturedProduct: React.FC<FeatProps> = ({ item }) => {
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true, amount: 0.1 }}
-        className="w-full max-w-[300px] lg:max-w-[600px] shrink-0"
+        className="w-full max-w-[300px] lg:max-w-[520px] shrink-0 flex justify-center"
       >
-        <div className="w-full aspect-square rounded-md overflow-hidden flex items-center justify-center">
-          <img
-            className="w-full h-full object-contain rounded-md"
-            alt="img"
-            src={item?.imageLink!}
-          />
-        </div>
+        <img
+          className="rounded-md w-full h-auto object-contain max-h-[720px]"
+          alt="img"
+          src={imageSrc}
+        />
       </motion.div>
 
       <div className="flex flex-col  w-[70%] sm:w-[30%] ">
