@@ -2,11 +2,28 @@ import { Lucia, Session, User } from "lucia";
 import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 import { prisma } from "./app/lib/prisma";
 import { cookies } from "next/headers";
-import { BASE_URL } from "./app/utils/constants";
 import { Google } from "arctic";
 
-const redirectURI = `${BASE_URL}/login/google/callback`;
-export const google = new Google(process.env.GOOGLE_CLIENT_ID!, process.env.GOOGLE_CLIENT_SECRET!, redirectURI)
+const normalizeOrigin = (origin: string) => origin.replace(/\/$/, "");
+
+const getAuthOrigin = (origin?: string) => {
+    if (origin) return normalizeOrigin(origin);
+
+    if (process.env.AUTH_URL) return normalizeOrigin(process.env.AUTH_URL);
+    if (process.env.NEXT_PUBLIC_APP_URL) return normalizeOrigin(process.env.NEXT_PUBLIC_APP_URL);
+
+    if (process.env.VERCEL_URL) {
+        const protocol = process.env.VERCEL_ENV === "development" ? "http" : "https";
+        return `${protocol}://${normalizeOrigin(process.env.VERCEL_URL)}`;
+    }
+
+    return "http://localhost:3000";
+};
+
+export const getGoogleAuth = (origin?: string) => {
+    const redirectURI = `${getAuthOrigin(origin)}/login/google/callback`;
+    return new Google(process.env.GOOGLE_CLIENT_ID!, process.env.GOOGLE_CLIENT_SECRET!, redirectURI);
+};
 
 const adapter = new PrismaAdapter(prisma.session, prisma.user);
 
