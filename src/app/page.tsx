@@ -14,7 +14,7 @@ export default async function Home() {
     cache: "no-store",
   });
   const data: ApiDataAttributes = await res.json();
-  const products = data.products!;
+  const products = data.products ?? [];
 
   const quantumCollection = products.filter(
     (item) => item.theme == "Quantum_Realm"
@@ -44,7 +44,7 @@ export default async function Home() {
     <div className={`w-full flex flex-col gap-[80px] mt-[76px]`}>
       <Banner />
       <Quantum session={session} items={quantumCollection} />
-      <FeaturedProduct item={martianKeyboard!} />
+      {martianKeyboard ? <FeaturedProduct item={martianKeyboard} /> : null}
       <Future session={session} items={futureCollection} />
       <Galactic session={session} items={galacticCollection} />
       <Highlights session={session} items={highlightsCollection} />

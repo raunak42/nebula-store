@@ -5,11 +5,10 @@ export const dynamic = "force-dynamic";
 
 export async function GET(req: Request): Promise<Response> {
     try {
-        const allProducts = await prisma.product.findMany()
-        return apiResponse({ products: allProducts, message: "Success" }, 200)
+        const allProducts = await prisma.product.findMany();
+        return apiResponse({ products: allProducts, message: "Success" }, 200);
     } catch (error) {
-        console.log(error)
-        return apiResponse({ message: "Error" })
+        console.log(error);
+        return apiResponse({ products: [], message: "Error" }, 500);
     }
-
 }
