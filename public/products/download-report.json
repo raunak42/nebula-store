@@ -1,0 +1,258 @@
+{
+  "downloaded": [
+    {
+      "id": 1112,
+      "url": "https://ih1.redbubble.net/image.3140992453.1543/ur,mouse_pad_small_lifestyle_gaming,wide_portrait,750x1000.jpg",
+      "name": "Quantum Flux Mousepad",
+      "file": "1112-quantum-flux-mousepad.jpg",
+      "local": "/products/1112-quantum-flux-mousepad.jpg",
+      "bytes": 174672,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1113,
+      "url": "https://neo4ic.com/cdn/shop/products/NEO4IC_RED_ZYPHR_ZIP_UP_JACKET97.jpg?v=1661491647",
+      "name": "Neon Horizon Hoodie",
+      "file": "1113-neon-horizon-hoodie.jpg",
+      "local": "/products/1113-neon-horizon-hoodie.jpg",
+      "bytes": 140281,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1114,
+      "url": "https://i.ebayimg.com/images/g/IQ4AAOSwPoZavmWQ/s-l1200.webp",
+      "name": "Cosmic Threads Beanie",
+      "file": "1114-cosmic-threads-beanie.webp",
+      "local": "/products/1114-cosmic-threads-beanie.webp",
+      "bytes": 245194,
+      "type": "image/webp"
+    },
+    {
+      "id": 1115,
+      "url": "https://ih1.redbubble.net/image.532886615.4855/icr,iphone_15_tough,back,a,x600-pad,600x600,f8f8f8.u4.jpg",
+      "name": "Quantum Entanglement Phone Case",
+      "file": "1115-quantum-entanglement-phone-case.jpg",
+      "local": "/products/1115-quantum-entanglement-phone-case.jpg",
+      "bytes": 16462,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1116,
+      "url": "https://i.etsystatic.com/37605027/r/il/24e165/4990493428/il_fullxfull.4990493428_bl4m.jpg",
+      "name": "Cybernetic Sunrise Mug",
+      "file": "1116-cybernetic-sunrise-mug.avif",
+      "local": "/products/1116-cybernetic-sunrise-mug.avif",
+      "bytes": 87940,
+      "type": "image/avif"
+    },
+    {
+      "id": 1117,
+      "url": "https://ih1.redbubble.net/image.1209864247.2514/sn,x1000-pad,750x1000,f8f8f8.u2.jpg",
+      "name": "Nano-Circuit Journal",
+      "file": "1117-nano-circuit-journal.jpg",
+      "local": "/products/1117-nano-circuit-journal.jpg",
+      "bytes": 64563,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1119,
+      "url": "https://ih1.redbubble.net/image.3840492293.6946/ur,mouse_pad_small_flatlay_prop,wide_portrait,750x1000.u1.jpg",
+      "name": "Nebula Drift Mousepad",
+      "file": "1119-nebula-drift-mousepad.jpg",
+      "local": "/products/1119-nebula-drift-mousepad.jpg",
+      "bytes": 113920,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1121,
+      "url": "https://i.etsystatic.com/21499050/r/il/13336f/2956697327/il_570xN.2956697327_b4n4.jpg",
+      "name": "Atomic Precision Mug",
+      "file": "1121-atomic-precision-mug.avif",
+      "local": "/products/1121-atomic-precision-mug.avif",
+      "bytes": 13508,
+      "type": "image/avif"
+    },
+    {
+      "id": 1122,
+      "url": "https://ih1.redbubble.net/image.1470282739.1813/hj,750x-pad,750x1000,f8f8f8.jpg",
+      "name": "Time Dilation Journal",
+      "file": "1122-time-dilation-journal.jpg",
+      "local": "/products/1122-time-dilation-journal.jpg",
+      "bytes": 89199,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1123,
+      "url": "https://m.media-amazon.com/images/I/81SNH6VlQQL._AC_UF1000,1000_QL80_.jpg",
+      "name": "Gravity Wave Keyboard",
+      "file": "1123-gravity-wave-keyboard.jpg",
+      "local": "/products/1123-gravity-wave-keyboard.jpg",
+      "bytes": 119135,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1124,
+      "url": "https://ih1.redbubble.net/image.4179382447.4764/ur,mouse_pad_small_flatlay_prop,wide_portrait,750x1000.u3.jpg",
+      "name": "Dystopian Skyline Mousepad",
+      "file": "1124-dystopian-skyline-mousepad.jpg",
+      "local": "/products/1124-dystopian-skyline-mousepad.jpg",
+      "bytes": 95366,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1125,
+      "url": "https://m.media-amazon.com/images/I/616JREhu+1L._AC_UY1100_.jpg",
+      "name": "Exosuit Emulation Hoodie",
+      "file": "1125-exosuit-emulation-hoodie.jpg",
+      "local": "/products/1125-exosuit-emulation-hoodie.jpg",
+      "bytes": 67418,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1126,
+      "url": "https://i.etsystatic.com/20034847/r/il/6797ad/3982848257/il_570xN.3982848257_k63h.jpg",
+      "name": "Neural Link Beanie",
+      "file": "1126-neural-link-beanie.jpg",
+      "local": "/products/1126-neural-link-beanie.jpg",
+      "bytes": 65332,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1127,
+      "url": "https://ih1.redbubble.net/image.4344546922.3712/icr,samsung_galaxy_s24_soft,back,a,x600-pad,600x600,f8f8f8.u2.jpg",
+      "name": "Hologram Projector Phone Case",
+      "file": "1127-hologram-projector-phone-case.jpg",
+      "local": "/products/1127-hologram-projector-phone-case.jpg",
+      "bytes": 45604,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1128,
+      "url": "https://cdn.dsmcdn.com/mnresize/600/-/ty923/product/media/images/20230530/22/371857938/958826554/1/1_org_zoom.jpg",
+      "name": "Cryosleep Simulation Mug",
+      "file": "1128-cryosleep-simulation-mug.webp",
+      "local": "/products/1128-cryosleep-simulation-mug.webp",
+      "bytes": 24074,
+      "type": "image/webp"
+    },
+    {
+      "id": 1129,
+      "url": "https://ih1.redbubble.net/image.4680132624.9268/sn,x1000-pad,750x1000,f8f8f8.u4.jpg",
+      "name": "Quantum Encryption Journal",
+      "file": "1129-quantum-encryption-journal.jpg",
+      "local": "/products/1129-quantum-encryption-journal.jpg",
+      "bytes": 126869,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1131,
+      "url": "https://ih1.redbubble.net/image.2636348750.3641/ur,desk_mat_lifestyle_gaming,wide_portrait,750x1000.jpg",
+      "name": "Asteroid Belt Keyboard",
+      "file": "1131-asteroid-belt-keyboard.jpg",
+      "local": "/products/1131-asteroid-belt-keyboard.jpg",
+      "bytes": 145969,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1132,
+      "url": "https://ih1.redbubble.net/image.5016929284.4673/fposter,medium,wall_texture,product,750x1000.u6.webp",
+      "name": "Quantum Foam Mousepad",
+      "file": "1132-quantum-foam-mousepad.webp",
+      "local": "/products/1132-quantum-foam-mousepad.webp",
+      "bytes": 118454,
+      "type": "image/webp"
+    },
+    {
+      "id": 1133,
+      "url": "https://technostorm.de/cdn/shop/files/hoodieNormal_907827e3-a0b2-4c87-b86b-4645d37be713.jpg?v=1721857104",
+      "name": "Metropolis 2100 Hoodie",
+      "file": "1133-metropolis-2100-hoodie.webp",
+      "local": "/products/1133-metropolis-2100-hoodie.webp",
+      "bytes": 139068,
+      "type": "image/webp"
+    },
+    {
+      "id": 1135,
+      "url": "https://m.media-amazon.com/images/I/71RH6U74UHL.jpg",
+      "name": "Schrodinger's Phone Case",
+      "file": "1135-schrodinger-s-phone-case.jpg",
+      "local": "/products/1135-schrodinger-s-phone-case.jpg",
+      "bytes": 159476,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1137,
+      "url": "https://m.media-amazon.com/images/I/81iDbS+EbdL._AC_UF1000,1000_QL80_.jpg",
+      "name": "Simulation Hypothesis Journal",
+      "file": "1137-simulation-hypothesis-journal.jpg",
+      "local": "/products/1137-simulation-hypothesis-journal.jpg",
+      "bytes": 106255,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1138,
+      "url": "https://i.pinimg.com/736x/34/22/f5/3422f5429995a331669ec67ff5e0f318.jpg",
+      "name": "Supernova Mechanical Keyboard",
+      "file": "1138-supernova-mechanical-keyboard.jpg",
+      "local": "/products/1138-supernova-mechanical-keyboard.jpg",
+      "bytes": 90755,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1139,
+      "url": "https://ih1.redbubble.net/image.3449061958.9005/ur,mouse_pad_small_flatlay_prop,wide_portrait,750x1000.jpg",
+      "name": "Hyperlane Highway Mousepad",
+      "file": "1139-hyperlane-highway-mousepad.jpg",
+      "local": "/products/1139-hyperlane-highway-mousepad.jpg",
+      "bytes": 136111,
+      "type": "image/jpeg"
+    },
+    {
+      "id": 1140,
+      "url": "https://images-cdn.ubuy.co.in/6365ff173e1ab873e27f48b3-funstuff-boys-nasa-astronaut-shark-robot.jpg",
+      "name": "Cosmic Explorer Astronaut Hoodie",
+      "file": "1140-cosmic-explorer-astronaut-hoodie.jpg",
+      "local": "/products/1140-cosmic-explorer-astronaut-hoodie.jpg",
+      "bytes": 202492,
+      "type": "image/jpeg"
+    }
+  ],
+  "skipped": [
+    {
+      "id": 1111,
+      "url": "https://iqunix.store/cdn/shop/files/20240530-110505.jpg?height=1200&v=1717038329",
+      "name": "Void Voyager Keyboard",
+      "reason": "200 text/html; charset=utf-8"
+    },
+    {
+      "id": 1118,
+      "url": "https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fretro-futuristic-setup-v0-psfge7weolba1.jpg%3Fwidth%3D3024%26format%3Dpjpg%26auto%3Dwebp%26s%3Dc4e1a06e88bdbe69b4db51ca871e84f251524ab0",
+      "name": "Singularity Shift Keyboard",
+      "reason": "200 text/html"
+    },
+    {
+      "id": 1120,
+      "url": "https://i0.wp.com/thehouseofrave.com/wp-content/uploads/2023/08/B0C9P4Y68V.PT01.webp?fit=640%2C800&ssl=1",
+      "name": "Holographic Data Beanie",
+      "reason": "400 text/html; charset=utf-8"
+    },
+    {
+      "id": 1130,
+      "url": "https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fy6cz7lw6h4f51.jpg",
+      "name": "Martian Terraform Keyboard",
+      "reason": "200 text/html"
+    },
+    {
+      "id": 1134,
+      "url": "https://gobemagic.com/wp-content/uploads/2023/11/01COSMICBEANIEHAT_900x.jpg.webp",
+      "name": "Cosmic Microwave Beanie",
+      "reason": "TypeError: fetch failed"
+    },
+    {
+      "id": 1136,
+      "url": "https://www.esaspaceshop.com/media/catalog/product/cache/d2505ceda29a0c6ac6b652aa442f962c/m/u/mug_3fs_navy.jpg",
+      "name": "Dyson Sphere Mug",
+      "reason": "TypeError: fetch failed"
+    }
+  ]
+}

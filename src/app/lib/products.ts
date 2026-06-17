@@ -4,7 +4,7 @@ export const products = [
     {
         id: 1111,
         imageLink:
-            "https://iqunix.store/cdn/shop/files/20240530-110505.jpg?height=1200&v=1717038329",
+            "/products/1111-void-voyager-keyboard.webp",
         name: "Void Voyager Keyboard",
         price: 8999,
         description:
@@ -23,7 +23,7 @@ export const products = [
     {
         id: 1112,
         imageLink:
-            "https://ih1.redbubble.net/image.3140992453.1543/ur,mouse_pad_small_lifestyle_gaming,wide_portrait,750x1000.jpg",
+            "/products/1112-quantum-flux-mousepad.jpg",
         name: "Quantum Flux Mousepad",
         price: 1499,
         description:
@@ -42,7 +42,7 @@ export const products = [
     {
         id: 1113,
         imageLink:
-            "https://neo4ic.com/cdn/shop/products/NEO4IC_RED_ZYPHR_ZIP_UP_JACKET97.jpg?v=1661491647",
+            "/products/1113-neon-horizon-hoodie.jpg",
         name: "Neon Horizon Hoodie",
         price: 3299,
         description:
@@ -60,7 +60,7 @@ export const products = [
     },
     {
         id: 1114,
-        imageLink: "https://i.ebayimg.com/images/g/IQ4AAOSwPoZavmWQ/s-l1200.webp",
+        imageLink: "/products/1114-cosmic-threads-beanie.webp",
         name: "Cosmic Threads Beanie",
         price: 1299,
         description:
@@ -79,7 +79,7 @@ export const products = [
     {
         id: 1115,
         imageLink:
-            "https://ih1.redbubble.net/image.532886615.4855/icr,iphone_15_tough,back,a,x600-pad,600x600,f8f8f8.u4.jpg",
+            "/products/1115-quantum-entanglement-phone-case.jpg",
         name: "Quantum Entanglement Phone Case",
         price: 999,
         description:
@@ -98,7 +98,7 @@ export const products = [
     {
         id: 1116,
         imageLink:
-            "https://i.etsystatic.com/37605027/r/il/24e165/4990493428/il_fullxfull.4990493428_bl4m.jpg",
+            "/products/1116-cybernetic-sunrise-mug.avif",
         name: "Cybernetic Sunrise Mug",
         price: 799,
         description:
@@ -117,7 +117,7 @@ export const products = [
     {
         id: 1117,
         imageLink:
-            "https://ih1.redbubble.net/image.1209864247.2514/sn,x1000-pad,750x1000,f8f8f8.u2.jpg",
+            "/products/1117-nano-circuit-journal.jpg",
         name: "Nano-Circuit Journal",
         price: 699,
         description:
@@ -136,7 +136,7 @@ export const products = [
     {
         id: 1118,
         imageLink:
-            "https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fretro-futuristic-setup-v0-psfge7weolba1.jpg%3Fwidth%3D3024%26format%3Dpjpg%26auto%3Dwebp%26s%3Dc4e1a06e88bdbe69b4db51ca871e84f251524ab0",
+            "/products/1118-singularity-shift-keyboard.webp",
         name: "Singularity Shift Keyboard",
         price: 8999,
         description:
@@ -155,7 +155,7 @@ export const products = [
     {
         id: 1119,
         imageLink:
-            "https://ih1.redbubble.net/image.3840492293.6946/ur,mouse_pad_small_flatlay_prop,wide_portrait,750x1000.u1.jpg",
+            "/products/1119-nebula-drift-mousepad.jpg",
         name: "Nebula Drift Mousepad",
         price: 1499,
         description:
@@ -174,7 +174,7 @@ export const products = [
     {
         id: 1120,
         imageLink:
-            "https://i0.wp.com/thehouseofrave.com/wp-content/uploads/2023/08/B0C9P4Y68V.PT01.webp?fit=640%2C800&ssl=1",
+            "/products/1120-holographic-data-beanie.webp",
         name: "Holographic Data Beanie",
         price: 1299,
         description:
@@ -193,7 +193,7 @@ export const products = [
     {
         id: 1121,
         imageLink:
-            "https://i.etsystatic.com/21499050/r/il/13336f/2956697327/il_570xN.2956697327_b4n4.jpg",
+            "/products/1121-atomic-precision-mug.avif",
         name: "Atomic Precision Mug",
         price: 799,
         description:
@@ -212,7 +212,7 @@ export const products = [
     {
         id: 1122,
         imageLink:
-            "https://ih1.redbubble.net/image.1470282739.1813/hj,750x-pad,750x1000,f8f8f8.jpg",
+            "/products/1122-time-dilation-journal.jpg",
         name: "Time Dilation Journal",
         price: 699,
         description:
@@ -231,7 +231,7 @@ export const products = [
     {
         id: 1123,
         imageLink:
-            "https://m.media-amazon.com/images/I/81SNH6VlQQL._AC_UF1000,1000_QL80_.jpg",
+            "/products/1123-gravity-wave-keyboard.jpg",
         name: "Gravity Wave Keyboard",
         price: 8999,
         description:
@@ -250,7 +250,7 @@ export const products = [
     {
         id: 1124,
         imageLink:
-            "https://ih1.redbubble.net/image.4179382447.4764/ur,mouse_pad_small_flatlay_prop,wide_portrait,750x1000.u3.jpg",
+            "/products/1124-dystopian-skyline-mousepad.jpg",
         name: "Dystopian Skyline Mousepad",
         price: 1499,
         description:
@@ -269,7 +269,7 @@ export const products = [
     {
         id: 1125,
         imageLink:
-            "https://m.media-amazon.com/images/I/616JREhu+1L._AC_UY1100_.jpg",
+            "/products/1125-exosuit-emulation-hoodie.jpg",
         name: "Exosuit Emulation Hoodie",
         price: 3299,
         description:
@@ -288,7 +288,7 @@ export const products = [
     {
         id: 1126,
         imageLink:
-            "https://i.etsystatic.com/20034847/r/il/6797ad/3982848257/il_570xN.3982848257_k63h.jpg",
+            "/products/1126-neural-link-beanie.jpg",
         name: "Neural Link Beanie",
         price: 1299,
         description:
@@ -307,7 +307,7 @@ export const products = [
     {
         id: 1127,
         imageLink:
-            "https://ih1.redbubble.net/image.4344546922.3712/icr,samsung_galaxy_s24_soft,back,a,x600-pad,600x600,f8f8f8.u2.jpg",
+            "/products/1127-hologram-projector-phone-case.jpg",
         name: "Hologram Projector Phone Case",
         price: 999,
         description:
@@ -326,7 +326,7 @@ export const products = [
     {
         id: 1128,
         imageLink:
-            "https://cdn.dsmcdn.com/mnresize/600/-/ty923/product/media/images/20230530/22/371857938/958826554/1/1_org_zoom.jpg",
+            "/products/1128-cryosleep-simulation-mug.webp",
         name: "Cryosleep Simulation Mug",
         price: 799,
         description:
@@ -345,7 +345,7 @@ export const products = [
     {
         id: 1129,
         imageLink:
-            "https://ih1.redbubble.net/image.4680132624.9268/sn,x1000-pad,750x1000,f8f8f8.u4.jpg",
+            "/products/1129-quantum-encryption-journal.jpg",
         name: "Quantum Encryption Journal",
         price: 699,
         description:
@@ -364,7 +364,7 @@ export const products = [
     {
         id: 1130,
         imageLink:
-            "https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fy6cz7lw6h4f51.jpg",
+            "/martian-terraform-keyboard.jpg",
         name: "Martian Terraform Keyboard",
         price: 8999,
         description:
@@ -383,7 +383,7 @@ export const products = [
     {
         id: 1131,
         imageLink:
-            "https://ih1.redbubble.net/image.2636348750.3641/ur,desk_mat_lifestyle_gaming,wide_portrait,750x1000.jpg",
+            "/products/1131-asteroid-belt-keyboard.jpg",
         name: "Asteroid Belt Keyboard",
         price: 8999,
         description:
@@ -402,7 +402,7 @@ export const products = [
     {
         id: 1132,
         imageLink:
-            "https://ih1.redbubble.net/image.5016929284.4673/fposter,medium,wall_texture,product,750x1000.u6.webp",
+            "/products/1132-quantum-foam-mousepad.webp",
         name: "Quantum Foam Mousepad",
         price: 1499,
         description:
@@ -421,7 +421,7 @@ export const products = [
     {
         id: 1133,
         imageLink:
-            "https://technostorm.de/cdn/shop/files/hoodieNormal_907827e3-a0b2-4c87-b86b-4645d37be713.jpg?v=1721857104",
+            "/products/1133-metropolis-2100-hoodie.webp",
         name: "Metropolis 2100 Hoodie",
         price: 3299,
         description:
@@ -440,7 +440,7 @@ export const products = [
     {
         id: 1134,
         imageLink:
-            "https://gobemagic.com/wp-content/uploads/2023/11/01COSMICBEANIEHAT_900x.jpg.webp",
+            "/products/1134-cosmic-microwave-beanie.webp",
         name: "Cosmic Microwave Beanie",
         price: 1299,
         description:
@@ -458,7 +458,7 @@ export const products = [
     },
     {
         id: 1135,
-        imageLink: "https://m.media-amazon.com/images/I/71RH6U74UHL.jpg",
+        imageLink: "/products/1135-schrodinger-s-phone-case.jpg",
         name: "Schrodinger's Phone Case",
         price: 999,
         description:
@@ -477,7 +477,7 @@ export const products = [
     {
         id: 1136,
         imageLink:
-            "https://www.esaspaceshop.com/media/catalog/product/cache/d2505ceda29a0c6ac6b652aa442f962c/m/u/mug_3fs_navy.jpg",
+            "/products/1136-dyson-sphere-mug.jpg",
         name: "Dyson Sphere Mug",
         price: 799,
         description:
@@ -496,7 +496,7 @@ export const products = [
     {
         id: 1137,
         imageLink:
-            "https://m.media-amazon.com/images/I/81iDbS+EbdL._AC_UF1000,1000_QL80_.jpg",
+            "/products/1137-simulation-hypothesis-journal.jpg",
         name: "Simulation Hypothesis Journal",
         price: 699,
         description:
@@ -515,7 +515,7 @@ export const products = [
     {
         id: 1138,
         imageLink:
-            "https://i.pinimg.com/736x/34/22/f5/3422f5429995a331669ec67ff5e0f318.jpg",
+            "/products/1138-supernova-mechanical-keyboard.jpg",
         name: "Supernova Mechanical Keyboard",
         price: 8999,
         description:
@@ -534,7 +534,7 @@ export const products = [
     {
         id: 1139,
         imageLink:
-            "https://ih1.redbubble.net/image.3449061958.9005/ur,mouse_pad_small_flatlay_prop,wide_portrait,750x1000.jpg",
+            "/products/1139-hyperlane-highway-mousepad.jpg",
         name: "Hyperlane Highway Mousepad",
         price: 1499,
         description:
@@ -553,7 +553,7 @@ export const products = [
     {
         id: 1140,
         imageLink:
-            "https://images-cdn.ubuy.co.in/6365ff173e1ab873e27f48b3-funstuff-boys-nasa-astronaut-shark-robot.jpg",
+            "/products/1140-cosmic-explorer-astronaut-hoodie.jpg",
         name: "Cosmic Explorer Astronaut Hoodie",
         price: 3299,
         description:
